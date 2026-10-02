@@ -1,0 +1,8 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { withBase } from '../data/urls';
+import '../styles/interior.css';
+---
+<SiteLayout noindex mainClass="interior-page" title="Страница не найдена" description="Страница не найдена. Перейдите на главную или посмотрите проекты.">
+  <section class="page-intro interior-intro interior-not-found"><p class="eyebrow interior-error-code" aria-hidden="true">404</p><h1>Здесь пока<br /><span>нет страницы.</span></h1><p class="lead">Возможно, адрес изменился. Продолжите с главной или со списка проектов.</p><div class="actions"><a class="button" href={withBase('/')}>На главную <span aria-hidden="true">→</span></a><a class="button button-secondary" href={withBase('/work/')}>Все проекты <span aria-hidden="true">↗</span></a></div></section>
+</SiteLayout>

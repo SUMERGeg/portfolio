@@ -1,0 +1,54 @@
+---
+import { render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { getProjects, projectHref, type Project } from '../../data/projects';
+import { withBase } from '../../data/urls';
+import { Image } from 'astro:assets';
+import { projectCovers, projectScreens } from '../../data/project-media';
+import CaseGallery from '../../components/case/CaseGallery.astro';
+import '../../styles/case.css';
+
+export const getStaticPaths = (async () => {
+  const projects = await getProjects();
+  return projects.map((project, index) => ({
+    params: { slug: project.data.slug },
+    props: { project, nextProject: projects[(index + 1) % projects.length] },
+  }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  project: Project;
+  nextProject: Project;
+}
+
+const { project, nextProject } = Astro.props;
+const { Content } = await render(project);
+const cover = projectCovers[project.data.slug];
+const screens = projectScreens[project.data.slug] ?? [];
+---
+
+<SiteLayout mainClass={`case-page case-${project.data.slug}`} title={project.data.title} description={project.data.summary}>
+  <header class="page-intro case-intro">
+    <a class="text-link" href={withBase('/work/')}>← Все проекты</a>
+    <p class="eyebrow">Кейс / {project.data.category}</p>
+    <h1>{project.data.title}</h1>
+    <div class="case-intro-bottom"><p class="lead">{project.data.summary}</p>
+    <a class="button" href={project.data.demoUrl} target="_blank" rel="noopener noreferrer">Открыть демонстрацию <span class="sr-only">(в новой вкладке)</span><span aria-hidden="true">↗</span></a></div>
+    <p class="case-status">{project.data.status}</p>
+    {(project.data.role || project.data.stack || project.data.year) && (
+      <dl class="project-facts">
+        {project.data.role && <div><dt>Роль</dt><dd>{project.data.role}</dd></div>}
+        {project.data.stack && <div><dt>Стек</dt><dd>{project.data.stack.join(', ')}</dd></div>}
+        {project.data.year && <div><dt>Год</dt><dd>{project.data.year}</dd></div>}
+      </dl>
+    )}
+  </header>
+  {cover && <figure class="case-cover"><Image data-project-transition={`project-${project.data.slug}`} src={cover.image} alt={cover.alt} widths={[600, 1000, 1440]} sizes="(max-width: 767px) calc(100vw - 40px), 92vw" format="webp" quality={90} loading="eager" fetchpriority="high" /><figcaption>Первый экран / {project.data.title}</figcaption></figure>}
+  <article class="case-narrative section"><Content /></article>
+  <CaseGallery screens={screens} projectTitle={project.data.title} />
+  <nav class="section case-navigation" aria-label="Другие проекты">
+    <a class="case-next" href={projectHref(nextProject)}><span class="eyebrow">Следующий проект</span><span>{nextProject.data.title} <span aria-hidden="true">↗</span></span></a>
+    <a class="button" href={withBase('/contact/')}>Обсудить похожую задачу <span aria-hidden="true">→</span></a>
+  </nav>
+</SiteLayout>

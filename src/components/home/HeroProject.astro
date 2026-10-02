@@ -1,0 +1,18 @@
+---
+import { Image } from 'astro:assets';
+import laptop from '../../assets/projects/noir/laptop-hero.png';
+import { withBase } from '../../data/urls';
+---
+
+<figure class="hero-preview">
+  <div class="hero-device">
+    <Image src={laptop} alt="Ноутбук с автомобильным сайтом NOIR: серебристый Porsche и заголовок PRESERVE PERFECTION" widths={[600, 1000, 1536]} sizes="(max-width: 899px) 95vw, 65vw" format="webp" quality={90} loading="eager" fetchpriority="high" />
+  </div>
+  <figcaption class="hero-caption">
+    <div class="hero-caption-project">
+      <span class="hero-caption-line" aria-hidden="true"></span>
+      <div><a href={withBase('/work/noir/')}><strong>NOIR</strong><span aria-hidden="true">↗</span></a><p>Сайт автодетейлинга</p></div>
+    </div>
+    <span class="hero-caption-status">Концептуальный проект</span>
+  </figcaption>
+</figure>

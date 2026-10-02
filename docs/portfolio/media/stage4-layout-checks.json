@@ -1,0 +1,270 @@
+{
+  "date": "2026-10-02",
+  "checks": [
+    {
+      "clientWidth": 375,
+      "h1": "NOIR",
+      "overflow": [],
+      "scrollWidth": 375,
+      "url": "/work/noir/",
+      "width": 390
+    },
+    {
+      "clientWidth": 375,
+      "h1": "СЕЗОН",
+      "scrollWidth": 375,
+      "url": "/work/sezon/",
+      "width": 390
+    },
+    {
+      "clientWidth": 375,
+      "h1": "Lost&Found",
+      "scrollWidth": 375,
+      "url": "/work/lostfound/",
+      "width": 390
+    },
+    {
+      "clientWidth": 375,
+      "h1": "Разные задачи.Свой характер.",
+      "scrollWidth": 375,
+      "url": "/work/",
+      "width": 390
+    },
+    {
+      "brokenImages": 0,
+      "clientWidth": 753,
+      "h1": "NOIR",
+      "scrollWidth": 753,
+      "url": "/work/noir/",
+      "width": 768
+    },
+    {
+      "brokenImages": 0,
+      "clientWidth": 753,
+      "h1": "СЕЗОН",
+      "scrollWidth": 753,
+      "url": "/work/sezon/",
+      "width": 768
+    },
+    {
+      "brokenImages": 0,
+      "clientWidth": 753,
+      "h1": "Lost&Found",
+      "scrollWidth": 753,
+      "url": "/work/lostfound/",
+      "width": 768
+    },
+    {
+      "brokenImages": 0,
+      "clientWidth": 753,
+      "h1": "Разные задачи.Свой характер.",
+      "scrollWidth": 753,
+      "url": "/work/",
+      "width": 768
+    },
+    {
+      "brokenImages": 0,
+      "clientWidth": 1009,
+      "h1": "NOIR",
+      "scrollWidth": 1009,
+      "url": "/work/noir/",
+      "width": 1024
+    },
+    {
+      "brokenImages": 0,
+      "clientWidth": 1009,
+      "h1": "СЕЗОН",
+      "scrollWidth": 1009,
+      "url": "/work/sezon/",
+      "width": 1024
+    },
+    {
+      "brokenImages": 0,
+      "clientWidth": 1009,
+      "h1": "Lost&Found",
+      "scrollWidth": 1009,
+      "url": "/work/lostfound/",
+      "width": 1024
+    },
+    {
+      "brokenImages": 0,
+      "clientWidth": 1009,
+      "h1": "Разные задачи.Свой характер.",
+      "scrollWidth": 1009,
+      "url": "/work/",
+      "width": 1024
+    },
+    {
+      "brokenImages": 0,
+      "clientWidth": 1425,
+      "h1": "NOIR",
+      "scrollWidth": 1425,
+      "url": "/work/noir/",
+      "width": 1440
+    },
+    {
+      "brokenImages": 0,
+      "clientWidth": 1425,
+      "h1": "СЕЗОН",
+      "scrollWidth": 1425,
+      "url": "/work/sezon/",
+      "width": 1440
+    },
+    {
+      "brokenImages": 0,
+      "clientWidth": 1425,
+      "h1": "Lost&Found",
+      "scrollWidth": 1425,
+      "url": "/work/lostfound/",
+      "width": 1440
+    },
+    {
+      "brokenImages": 0,
+      "clientWidth": 1425,
+      "h1": "Разные задачи.Свой характер.",
+      "scrollWidth": 1425,
+      "url": "/work/",
+      "width": 1440
+    },
+    {
+      "clientWidth": 1425,
+      "h1": "Сайт подвашу задачу.",
+      "overflow": [],
+      "scrollWidth": 1425,
+      "url": "/services/",
+      "width": 1440
+    },
+    {
+      "clientWidth": 1425,
+      "h1": "Я Егор.Делаю сайты.",
+      "overflow": [],
+      "scrollWidth": 1425,
+      "url": "/about/",
+      "width": 1440
+    },
+    {
+      "clientWidth": 1425,
+      "h1": "Обсудимваш проект.",
+      "overflow": [],
+      "scrollWidth": 1425,
+      "url": "/contact/",
+      "width": 1440
+    },
+    {
+      "clientWidth": 1440,
+      "h1": "Здесь поканет страницы.",
+      "overflow": [],
+      "scrollWidth": 1440,
+      "url": "/404.html",
+      "width": 1440
+    },
+    {
+      "clientWidth": 1009,
+      "h1": "Сайт подвашу задачу.",
+      "overflow": [],
+      "scrollWidth": 1009,
+      "url": "/services/",
+      "width": 1024
+    },
+    {
+      "clientWidth": 1009,
+      "h1": "Я Егор.Делаю сайты.",
+      "overflow": [],
+      "scrollWidth": 1009,
+      "url": "/about/",
+      "width": 1024
+    },
+    {
+      "clientWidth": 1009,
+      "h1": "Обсудимваш проект.",
+      "overflow": [],
+      "scrollWidth": 1009,
+      "url": "/contact/",
+      "width": 1024
+    },
+    {
+      "clientWidth": 1024,
+      "h1": "Здесь поканет страницы.",
+      "overflow": [],
+      "scrollWidth": 1024,
+      "url": "/404.html",
+      "width": 1024
+    },
+    {
+      "clientWidth": 753,
+      "h1": "Сайт подвашу задачу.",
+      "overflow": [],
+      "scrollWidth": 753,
+      "url": "/services/",
+      "width": 768
+    },
+    {
+      "clientWidth": 753,
+      "h1": "Я Егор.Делаю сайты.",
+      "overflow": [],
+      "scrollWidth": 753,
+      "url": "/about/",
+      "width": 768
+    },
+    {
+      "clientWidth": 753,
+      "h1": "Обсудимваш проект.",
+      "overflow": [],
+      "scrollWidth": 753,
+      "url": "/contact/",
+      "width": 768
+    },
+    {
+      "clientWidth": 768,
+      "h1": "Здесь поканет страницы.",
+      "overflow": [],
+      "scrollWidth": 768,
+      "url": "/404.html",
+      "width": 768
+    },
+    {
+      "clientWidth": 375,
+      "h1": "Сайт подвашу задачу.",
+      "overflow": [],
+      "scrollWidth": 375,
+      "url": "/services/",
+      "width": 390
+    },
+    {
+      "clientWidth": 375,
+      "h1": "Я Егор.Делаю сайты.",
+      "overflow": [],
+      "scrollWidth": 375,
+      "url": "/about/",
+      "width": 390
+    },
+    {
+      "clientWidth": 375,
+      "h1": "Обсудимваш проект.",
+      "overflow": [],
+      "scrollWidth": 375,
+      "url": "/contact/",
+      "width": 390
+    },
+    {
+      "clientWidth": 390,
+      "h1": "Здесь поканет страницы.",
+      "overflow": [],
+      "scrollWidth": 390,
+      "url": "/404.html",
+      "width": 390
+    }
+  ],
+  "scenarioChecks": [
+    "case navigation NOIR → SEZON → Lost&Found → NOIR",
+    "return to work list",
+    "mobile menu to services",
+    "service discussion to contact",
+    "Telegram and mailto hrefs verified"
+  ],
+  "resourceCheck": {
+    "pages": 9,
+    "checked": 246,
+    "failures": []
+  }
+}

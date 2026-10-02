@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import type { CaseScreen } from '../../data/project-media';
+interface Props { screens: CaseScreen[]; projectTitle: string; }
+const { screens, projectTitle } = Astro.props;
+---
+<section class="case-gallery" aria-labelledby="screens-heading">
+  <div class="case-section-heading"><p class="eyebrow">02 / Экраны и адаптивность</p><h2 id="screens-heading">Дизайн в деталях</h2></div>
+  {screens.map((screen, index) => (
+    <section class="case-screen" aria-labelledby={`screen-${screen.id}`}>
+      <header class="case-screen-heading">
+        <p class="eyebrow">{String(index + 1).padStart(2, '0')} / {projectTitle}</p>
+        <div><h3 id={`screen-${screen.id}`}>{screen.title}</h3><p>{screen.description}</p></div>
+      </header>
+      <div class="case-screen-pair">
+        <figure class="case-screen-desktop">
+          <figcaption>Для компьютера</figcaption>
+          <a href={screen.desktop.src} target="_blank" rel="noopener noreferrer" aria-label={`${projectTitle}: ${screen.title}, полный экран для компьютера (в новой вкладке)`}>
+            <Image src={screen.desktop} alt={`${projectTitle}: ${screen.title}, версия для компьютера`} widths={[600, 1000, 1440]} sizes="(max-width: 767px) calc(100vw - 40px), 68vw" format="webp" quality={85} loading="lazy" />
+          </a>
+        </figure>
+        <figure class="case-screen-mobile">
+          <figcaption>Для телефона</figcaption>
+          <a href={screen.mobile.src} target="_blank" rel="noopener noreferrer" aria-label={`${projectTitle}: ${screen.title}, полный экран для телефона (в новой вкладке)`}>
+            <Image src={screen.mobile} alt={`${projectTitle}: ${screen.title}, версия для телефона`} widths={[280, 390]} sizes="(max-width: 767px) 280px, 23vw" format="webp" quality={85} loading="lazy" />
+          </a>
+        </figure>
+      </div>
+    </section>
+  ))}
+</section>

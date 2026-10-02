@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Материалы портфолио — три проекта</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; padding: 40px; color: #f4f7fb; background: #070b11; font: 16px/1.5 system-ui,sans-serif; }
+      h1 { margin: 0; font-size: 30px; }
+      .intro { margin: 8px 0 30px; color: #a6afbc; }
+      main { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 28px; }
+      h2 { margin: 0 0 6px; font-size: 22px; }
+      p { margin: 0 0 16px; color: #a6afbc; }
+      img { display: block; width: 100%; height: auto; border-radius: 8px; }
+      .mobile { width: 160px; margin: 20px auto 0; }
+      .label { margin-top: 10px; text-align: center; font-size: 13px; color: #a6afbc; }
+      @media (max-width: 700px) { main { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <h1>Материалы трёх проектов</h1>
+    <p class="intro">Реальные снимки демонстрационных сайтов · 2 октября 2026 · desktop и mobile</p>
+    <main>
+      <section>
+        <h2>NOIR</h2><p>Сайт автодетейлинга · концепт</p>
+        <img src="../../../src/assets/projects/noir/home-desktop.jpg" alt="Главная NOIR на компьютере" />
+        <img class="mobile" src="../../../src/assets/projects/noir/home-mobile.jpg" alt="Главная NOIR на телефоне" />
+        <div class="label">Главная + страница стоимости</div>
+      </section>
+      <section>
+        <h2>СЕЗОН</h2><p>Цветочный магазин · концепт</p>
+        <img src="../../../src/assets/projects/sezon/home-desktop.jpg" alt="Главная Сезона на компьютере" />
+        <img class="mobile" src="../../../src/assets/projects/sezon/home-mobile.jpg" alt="Главная Сезона на телефоне" />
+        <div class="label">Главная + каталог + карточка букета</div>
+      </section>
+      <section>
+        <h2>Lost&Found</h2><p>Городской сервис · демоверсия</p>
+        <img src="../../../src/assets/projects/lostfound/feed-desktop.jpg" alt="Лента LostFound на компьютере" />
+        <img class="mobile" src="../../../src/assets/projects/lostfound/feed-mobile.jpg" alt="Лента LostFound на телефоне" />
+        <div class="label">Лента + объявление + карта</div>
+      </section>
+    </main>
+  </body>
+</html>

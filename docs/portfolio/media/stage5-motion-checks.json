@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-02",
+  "viewports": [
+    {
+      "clientWidth": 1425,
+      "deviceEntry": "matrix(0.959178, 0, 0, 0.959178, 20.4109, 19.0502)",
+      "motion": "full",
+      "pointerEnabled": true,
+      "scrollWidth": 1425,
+      "width": 1440
+    },
+    {
+      "clientWidth": 1009,
+      "deviceEntry": "matrix(0.949318, 0, 0, 0.949318, 25.341, 23.6516)",
+      "motion": "full",
+      "pointerEnabled": true,
+      "scrollWidth": 1009,
+      "width": 1024
+    },
+    {
+      "clientWidth": 753,
+      "deviceEntry": "matrix(0.94936, 0, 0, 0.94936, 0, 23.6318)",
+      "motion": "full",
+      "pointerEnabled": false,
+      "scrollWidth": 753,
+      "width": 768
+    },
+    {
+      "clientWidth": 375,
+      "deviceEntry": "matrix(0.949258, 0, 0, 0.949258, 0, 23.6796)",
+      "motion": "full",
+      "pointerEnabled": false,
+      "scrollWidth": 375,
+      "width": 390
+    }
+  ],
+  "browser": {
+    "heroEntrance": true,
+    "pointerTiltAndReset": true,
+    "selectedCoverForwardAndBackTransition": true,
+    "unselectedCoversAnimate": false,
+    "scrollReveal": true,
+    "keyboardFocusVisible": true,
+    "consoleErrors": []
+  },
+  "scriptHarness": {
+    "reducedMotionInitialAndChange": true,
+    "pointerCleanup": true,
+    "focusCancelsReveal": true,
+    "touchEntranceHasNoHorizontalOffset": true,
+    "pagehideCleanup": true
+  },
+  "limits": [
+    "OS reduced-motion preference was verified through the script harness and CSS; not emulated in the browser.",
+    "JavaScript-disabled browser session was not run; content visibility follows the base HTML/CSS."
+  ]
+}

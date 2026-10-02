@@ -1,0 +1,23 @@
+---
+import { Image } from 'astro:assets';
+import { projectHref, type Project } from '../data/projects';
+import { projectCovers } from '../data/project-media';
+import '../styles/project-card.css';
+
+interface Props { project: Project; headingLevel?: 'h2' | 'h3'; }
+const { project, headingLevel = 'h3' } = Astro.props;
+const Heading = headingLevel;
+const cover = projectCovers[project.data.slug];
+---
+
+<article class="project-card">
+  <a class="project-card-link" href={projectHref(project)} aria-label={`Посмотреть кейс ${project.data.title}`}>
+    <div class="project-card-preview" data-project-transition={`project-${project.data.slug}`}>
+      {cover && <Image src={cover.image} alt={cover.alt} widths={[400, 800, 1200]} sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 899px) 65vw, 33vw" format="webp" quality={85} loading="lazy" />}
+      <span class="project-card-arrow" aria-hidden="true">↗</span>
+    </div>
+    <div class="project-card-title"><Heading>{project.data.title}</Heading><span>{project.data.category}</span></div>
+    <p class="project-card-summary">{project.data.summary}</p>
+    <p class="project-card-status">{project.data.status}</p>
+  </a>
+</article>

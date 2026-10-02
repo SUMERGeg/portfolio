@@ -1,0 +1,519 @@
+{
+  "date": "2026-10-02",
+  "checks": [
+    {
+      "brokenVisibleImages": [],
+      "client": 1425,
+      "font": true,
+      "h1": "Сайты для бизнеса, которые работают",
+      "path": "/",
+      "scroll": 1425,
+      "title": "Егор Данилов — сайты для бизнеса",
+      "viewport": 1440
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 1009,
+      "font": true,
+      "h1": "Сайты для бизнеса, которые работают",
+      "path": "/",
+      "scroll": 1009,
+      "title": "Егор Данилов — сайты для бизнеса",
+      "viewport": 1024
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 753,
+      "font": true,
+      "h1": "Сайты для бизнеса, которые работают",
+      "path": "/",
+      "scroll": 753,
+      "title": "Егор Данилов — сайты для бизнеса",
+      "viewport": 768
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 375,
+      "font": true,
+      "h1": "Сайты для бизнеса, которые работают",
+      "path": "/",
+      "scroll": 375,
+      "title": "Егор Данилов — сайты для бизнеса",
+      "viewport": 390
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 1425,
+      "font": true,
+      "h1": "Разные задачи.Свой характер.",
+      "path": "/work/",
+      "scroll": 1425,
+      "title": "Проекты — Егор Данилов — сайты для бизнеса",
+      "viewport": 1440
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 1009,
+      "font": true,
+      "h1": "Разные задачи.Свой характер.",
+      "path": "/work/",
+      "scroll": 1009,
+      "title": "Проекты — Егор Данилов — сайты для бизнеса",
+      "viewport": 1024
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 753,
+      "font": true,
+      "h1": "Разные задачи.Свой характер.",
+      "path": "/work/",
+      "scroll": 753,
+      "title": "Проекты — Егор Данилов — сайты для бизнеса",
+      "viewport": 768
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 375,
+      "font": true,
+      "h1": "Разные задачи.Свой характер.",
+      "path": "/work/",
+      "scroll": 375,
+      "title": "Проекты — Егор Данилов — сайты для бизнеса",
+      "viewport": 390
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 1425,
+      "font": true,
+      "h1": "NOIR",
+      "path": "/work/noir/",
+      "scroll": 1425,
+      "title": "NOIR — Егор Данилов — сайты для бизнеса",
+      "viewport": 1440
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 1009,
+      "font": true,
+      "h1": "NOIR",
+      "path": "/work/noir/",
+      "scroll": 1009,
+      "title": "NOIR — Егор Данилов — сайты для бизнеса",
+      "viewport": 1024
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 753,
+      "font": true,
+      "h1": "NOIR",
+      "path": "/work/noir/",
+      "scroll": 753,
+      "title": "NOIR — Егор Данилов — сайты для бизнеса",
+      "viewport": 768
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 375,
+      "font": true,
+      "h1": "NOIR",
+      "path": "/work/noir/",
+      "scroll": 375,
+      "title": "NOIR — Егор Данилов — сайты для бизнеса",
+      "viewport": 390
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 1425,
+      "font": true,
+      "h1": "СЕЗОН",
+      "path": "/work/sezon/",
+      "scroll": 1425,
+      "title": "СЕЗОН — Егор Данилов — сайты для бизнеса",
+      "viewport": 1440
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 1009,
+      "font": true,
+      "h1": "СЕЗОН",
+      "path": "/work/sezon/",
+      "scroll": 1009,
+      "title": "СЕЗОН — Егор Данилов — сайты для бизнеса",
+      "viewport": 1024
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 753,
+      "font": true,
+      "h1": "СЕЗОН",
+      "path": "/work/sezon/",
+      "scroll": 753,
+      "title": "СЕЗОН — Егор Данилов — сайты для бизнеса",
+      "viewport": 768
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 375,
+      "font": true,
+      "h1": "СЕЗОН",
+      "path": "/work/sezon/",
+      "scroll": 375,
+      "title": "СЕЗОН — Егор Данилов — сайты для бизнеса",
+      "viewport": 390
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 1425,
+      "font": true,
+      "h1": "Lost&Found",
+      "path": "/work/lostfound/",
+      "scroll": 1425,
+      "title": "Lost&Found — Егор Данилов — сайты для бизнеса",
+      "viewport": 1440
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 1009,
+      "font": true,
+      "h1": "Lost&Found",
+      "path": "/work/lostfound/",
+      "scroll": 1009,
+      "title": "Lost&Found — Егор Данилов — сайты для бизнеса",
+      "viewport": 1024
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 753,
+      "font": true,
+      "h1": "Lost&Found",
+      "path": "/work/lostfound/",
+      "scroll": 753,
+      "title": "Lost&Found — Егор Данилов — сайты для бизнеса",
+      "viewport": 768
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 375,
+      "font": true,
+      "h1": "Lost&Found",
+      "path": "/work/lostfound/",
+      "scroll": 375,
+      "title": "Lost&Found — Егор Данилов — сайты для бизнеса",
+      "viewport": 390
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 1425,
+      "font": true,
+      "h1": "Сайт подвашу задачу.",
+      "path": "/services/",
+      "scroll": 1425,
+      "title": "Услуги — Егор Данилов — сайты для бизнеса",
+      "viewport": 1440
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 1009,
+      "font": true,
+      "h1": "Сайт подвашу задачу.",
+      "path": "/services/",
+      "scroll": 1009,
+      "title": "Услуги — Егор Данилов — сайты для бизнеса",
+      "viewport": 1024
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 753,
+      "font": true,
+      "h1": "Сайт подвашу задачу.",
+      "path": "/services/",
+      "scroll": 753,
+      "title": "Услуги — Егор Данилов — сайты для бизнеса",
+      "viewport": 768
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 375,
+      "font": true,
+      "h1": "Сайт подвашу задачу.",
+      "path": "/services/",
+      "scroll": 375,
+      "title": "Услуги — Егор Данилов — сайты для бизнеса",
+      "viewport": 390
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 1425,
+      "font": true,
+      "h1": "Я Егор.Делаю сайты.",
+      "path": "/about/",
+      "scroll": 1425,
+      "title": "О себе — Егор Данилов — сайты для бизнеса",
+      "viewport": 1440
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 1009,
+      "font": true,
+      "h1": "Я Егор.Делаю сайты.",
+      "path": "/about/",
+      "scroll": 1009,
+      "title": "О себе — Егор Данилов — сайты для бизнеса",
+      "viewport": 1024
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 753,
+      "font": true,
+      "h1": "Я Егор.Делаю сайты.",
+      "path": "/about/",
+      "scroll": 753,
+      "title": "О себе — Егор Данилов — сайты для бизнеса",
+      "viewport": 768
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 375,
+      "font": true,
+      "h1": "Я Егор.Делаю сайты.",
+      "path": "/about/",
+      "scroll": 375,
+      "title": "О себе — Егор Данилов — сайты для бизнеса",
+      "viewport": 390
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 1425,
+      "font": true,
+      "h1": "Обсудимваш проект.",
+      "path": "/contact/",
+      "scroll": 1425,
+      "title": "Контакты — Егор Данилов — сайты для бизнеса",
+      "viewport": 1440
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 1009,
+      "font": true,
+      "h1": "Обсудимваш проект.",
+      "path": "/contact/",
+      "scroll": 1009,
+      "title": "Контакты — Егор Данилов — сайты для бизнеса",
+      "viewport": 1024
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 753,
+      "font": true,
+      "h1": "Обсудимваш проект.",
+      "path": "/contact/",
+      "scroll": 753,
+      "title": "Контакты — Егор Данилов — сайты для бизнеса",
+      "viewport": 768
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 375,
+      "font": true,
+      "h1": "Обсудимваш проект.",
+      "path": "/contact/",
+      "scroll": 375,
+      "title": "Контакты — Егор Данилов — сайты для бизнеса",
+      "viewport": 390
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 1440,
+      "font": true,
+      "h1": "Здесь поканет страницы.",
+      "path": "/404.html",
+      "scroll": 1440,
+      "title": "Страница не найдена — Егор Данилов — сайты для бизнеса",
+      "viewport": 1440
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 1024,
+      "font": true,
+      "h1": "Здесь поканет страницы.",
+      "path": "/404.html",
+      "scroll": 1024,
+      "title": "Страница не найдена — Егор Данилов — сайты для бизнеса",
+      "viewport": 1024
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 768,
+      "font": true,
+      "h1": "Здесь поканет страницы.",
+      "path": "/404.html",
+      "scroll": 768,
+      "title": "Страница не найдена — Егор Данилов — сайты для бизнеса",
+      "viewport": 768
+    },
+    {
+      "brokenVisibleImages": [],
+      "client": 390,
+      "font": true,
+      "h1": "Здесь поканет страницы.",
+      "path": "/404.html",
+      "scroll": 390,
+      "title": "Страница не найдена — Егор Данилов — сайты для бизнеса",
+      "viewport": 390
+    },
+    {
+      "client": 466,
+      "path": "/",
+      "scroll": 466,
+      "services": [
+        {
+          "client": 154,
+          "scroll": 154,
+          "width": 154.40000915527344
+        },
+        {
+          "client": 154,
+          "scroll": 154,
+          "width": 154.40000915527344
+        },
+        {
+          "client": 154,
+          "scroll": 154,
+          "width": 154.40000915527344
+        }
+      ],
+      "viewport": 482
+    },
+    {
+      "client": 505,
+      "path": "/",
+      "scroll": 505,
+      "services": [
+        {
+          "client": 193,
+          "scroll": 193,
+          "width": 192.8000030517578
+        },
+        {
+          "client": 193,
+          "scroll": 193,
+          "width": 192.8000030517578
+        },
+        {
+          "client": 193,
+          "scroll": 193,
+          "width": 192.8000030517578
+        }
+      ],
+      "viewport": 520
+    },
+    {
+      "client": 754,
+      "path": "/",
+      "scroll": 754,
+      "services": [
+        {
+          "client": 178,
+          "scroll": 178,
+          "width": 177.53750610351562
+        },
+        {
+          "client": 178,
+          "scroll": 178,
+          "width": 177.53750610351562
+        },
+        {
+          "client": 178,
+          "scroll": 178,
+          "width": 177.53750610351562
+        }
+      ],
+      "viewport": 770
+    },
+    {
+      "client": 785,
+      "path": "/",
+      "scroll": 785,
+      "services": [
+        {
+          "client": 197,
+          "scroll": 197,
+          "width": 196.5375061035156
+        },
+        {
+          "client": 197,
+          "scroll": 197,
+          "width": 196.5375061035156
+        },
+        {
+          "client": 197,
+          "scroll": 197,
+          "width": 196.5375061035156
+        }
+      ],
+      "viewport": 800
+    },
+    {
+      "client": 885,
+      "path": "/",
+      "scroll": 885,
+      "services": [
+        {
+          "client": 259,
+          "scroll": 259,
+          "width": 259.0375061035156
+        },
+        {
+          "client": 259,
+          "scroll": 259,
+          "width": 259.0375061035156
+        },
+        {
+          "client": 259,
+          "scroll": 259,
+          "width": 259.0375061035156
+        }
+      ],
+      "viewport": 900
+    },
+    {
+      "client": 1185,
+      "path": "/",
+      "scroll": 1185,
+      "services": [
+        {
+          "client": 413,
+          "scroll": 413,
+          "width": 413.2375183105469
+        },
+        {
+          "client": 413,
+          "scroll": 413,
+          "width": 413.2375183105469
+        },
+        {
+          "client": 413,
+          "scroll": 413,
+          "width": 413.2375183105469
+        }
+      ],
+      "viewport": 1200
+    }
+  ],
+  "interactionResults": {
+    "menuTabAndEscape": true,
+    "menuAnchorCloses": true,
+    "skipLinkFocusMain": true,
+    "caseCycle": [
+      "noir",
+      "sezon",
+      "lostfound",
+      "noir"
+    ],
+    "contactCTA": true
+  },
+  "limitations": [
+    "OS reduced-motion and JavaScript-disabled browser sessions not emulated",
+    "Field LCP/CLS/INP not measured"
+  ]
+}

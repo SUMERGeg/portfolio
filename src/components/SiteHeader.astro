@@ -1,0 +1,41 @@
+---
+import { navigation, site } from '../data/site';
+import { withBase } from '../data/urls';
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const workPath = withBase('/work/').replace(/\/$/, '');
+
+function isCurrent(href: string): boolean {
+  if (href.includes('#')) return false;
+  const path = withBase(href).replace(/\/$/, '') || '/';
+  return currentPath === path || (path === workPath && currentPath.startsWith(`${workPath}/`));
+}
+---
+
+<header class="site-header container">
+  <a class="site-name" href={withBase('/')} aria-label={`${site.name} — главная`}>
+    {site.name}<span>Сайты для бизнеса</span>
+  </a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" hidden>
+    <span class="menu-label">Меню</span>
+    <span class="menu-icon" aria-hidden="true"><span></span><span></span></span>
+  </button>
+  <nav id="primary-navigation" class="site-navigation" aria-label="Основная навигация">
+    <ul class="navigation">
+      {navigation.map((item) => (
+        <li>
+          <a href={withBase(item.href)} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+  <a class="button header-cta" href={withBase('/contact/')}>
+    Обсудить проект<span class="button-arrow" aria-hidden="true">→</span>
+  </a>
+</header>
+
+<script>
+  import '../scripts/navigation';
+</script>

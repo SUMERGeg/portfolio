@@ -1,0 +1,36 @@
+:root {
+  color-scheme: dark;
+  --color-background: #070b11;
+  --color-surface: #0e151f;
+  --color-surface-strong: #111a26;
+  --color-text: #f4f7fb;
+  --color-muted: #a6afbc;
+  --color-accent: #1e67ff;
+  --color-accent-hover: #1557df;
+  --color-line: rgb(244 247 251 / 14%);
+  --color-line-strong: rgb(244 247 251 / 30%);
+  --color-focus: #9ec2ff;
+  --font-body: 'Manrope Variable', 'Segoe UI', sans-serif;
+  --type-display: clamp(2.5rem, 5vw, 4.5rem);
+  --type-section: clamp(1.875rem, 3vw, 2.625rem);
+  --type-card: clamp(1.25rem, 1.6vw, 1.5rem);
+  --type-body: clamp(1rem, 1.25vw, 1.125rem);
+  --type-lead: clamp(1.0625rem, 1.6vw, 1.375rem);
+  --type-meta: 0.8125rem;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-page: clamp(1.25rem, 3.125vw, 4rem);
+  --space-section: clamp(3.5rem, 7vw, 6rem);
+  --container-width: 82.5rem;
+  --radius-small: 0.75rem;
+  --radius-button: 999px;
+  --duration-short: 160ms;
+  --ease-standard: cubic-bezier(0.2, 0.7, 0.3, 1);
+}

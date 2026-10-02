@@ -1,0 +1,29 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { getProjects } from '../../data/projects';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { withBase } from '../../data/urls';
+import '../../styles/work.css';
+
+const projects = await getProjects();
+---
+
+<SiteLayout mainClass="work-page" title="Проекты" description="NOIR, СЕЗОН и Lost&Found: концептуальные сайты и демоверсия городского сервиса.">
+  <section class="page-intro work-intro">
+    <p class="eyebrow">01 / Работы</p>
+    <h1>Разные задачи.<br /><span>Свой характер.</span></h1>
+    <p class="lead">Сайт услуг, цветочный магазин и городской сервис. У каждой работы — своя задача и визуальный характер.</p>
+  </section>
+  <ul class="work-grid">
+    {projects.map((project) => (
+      <li>
+        <ProjectCard project={project} headingLevel="h2" />
+        {project.data.role && <p class="work-role">{project.data.role}</p>}
+      </li>
+    ))}
+  </ul>
+  <section class="section work-contact">
+    <h2>Какой сайт нужен вам?</h2>
+    <a class="button" href={withBase('/contact/')}>Обсудить проект <span aria-hidden="true">→</span></a>
+  </section>
+</SiteLayout>

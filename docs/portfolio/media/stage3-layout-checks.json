@@ -1,0 +1,212 @@
+{
+  "checkedAt": "2026-10-02",
+  "viewports": [
+    {
+      "clientWidth": 1425,
+      "headline": {
+        "bottom": 369.0749969482422,
+        "height": 144.625,
+        "left": 52.400001525878906,
+        "right": 738.8000259399414,
+        "top": 224.4499969482422,
+        "width": 686.4000244140625,
+        "x": 52.400001525878906,
+        "y": 224.4499969482422
+      },
+      "height": 3614,
+      "hero": {
+        "bottom": 726.8500137329102,
+        "height": 610.2000122070312,
+        "left": 52.400001525878906,
+        "right": 1372.400001525879,
+        "top": 116.6500015258789,
+        "width": 1320,
+        "x": 52.400001525878906,
+        "y": 116.6500015258789
+      },
+      "images": [
+        {
+          "height": 540,
+          "loaded": true,
+          "width": 810
+        },
+        {
+          "height": 210,
+          "loaded": true,
+          "width": 422
+        },
+        {
+          "height": 210,
+          "loaded": true,
+          "width": 422
+        },
+        {
+          "height": 210,
+          "loaded": true,
+          "width": 422
+        }
+      ],
+      "overflow": [],
+      "processGrid": "306px 306px 306px 306px",
+      "projectGrid": "424px 424px 424px",
+      "scrollWidth": 1425,
+      "width": 1440
+    },
+    {
+      "clientWidth": 1009,
+      "headline": {
+        "bottom": 325.5250015258789,
+        "height": 101.7249984741211,
+        "left": 32,
+        "right": 523.2875061035156,
+        "top": 223.8000030517578,
+        "width": 491.2875061035156,
+        "x": 32,
+        "y": 223.8000030517578
+      },
+      "height": 3044,
+      "hero": {
+        "bottom": 584.7250061035156,
+        "height": 468.7250061035156,
+        "left": 32,
+        "right": 976.7999877929688,
+        "top": 116,
+        "width": 944.7999877929688,
+        "x": 32,
+        "y": 116
+      },
+      "images": [
+        {
+          "height": 399,
+          "loaded": true,
+          "width": 598
+        },
+        {
+          "height": 148,
+          "loaded": true,
+          "width": 297
+        },
+        {
+          "height": 148,
+          "loaded": true,
+          "width": 297
+        },
+        {
+          "height": 148,
+          "loaded": true,
+          "width": 297
+        }
+      ],
+      "overflow": [],
+      "processGrid": "218.2px 218.2px 218.2px 218.2px",
+      "projectGrid": "298.925px 298.938px 298.925px",
+      "scrollWidth": 1009,
+      "width": 1024
+    },
+    {
+      "clientWidth": 753,
+      "headline": {
+        "bottom": 299.3000030517578,
+        "height": 99.5,
+        "left": 24,
+        "right": 586.0750122070312,
+        "top": 199.8000030517578,
+        "width": 562.0750122070312,
+        "x": 24,
+        "y": 199.8000030517578
+      },
+      "height": 4455,
+      "hero": {
+        "bottom": 1099.2999877929688,
+        "height": 983.2999877929688,
+        "left": 24,
+        "right": 728.7999877929688,
+        "top": 116,
+        "width": 704.7999877929688,
+        "x": 24,
+        "y": 116
+      },
+      "images": [
+        {
+          "height": 470,
+          "loaded": true,
+          "width": 705
+        },
+        {
+          "height": 351,
+          "loaded": true,
+          "width": 703
+        },
+        {
+          "height": 169,
+          "loaded": true,
+          "width": 339
+        },
+        {
+          "height": 169,
+          "loaded": true,
+          "width": 339
+        }
+      ],
+      "overflow": [],
+      "processGrid": "340.4px 340.4px",
+      "projectGrid": "340.4px 340.4px",
+      "scrollWidth": 753,
+      "width": 768
+    },
+    {
+      "clientWidth": 375,
+      "headline": {
+        "bottom": 302.1000061035156,
+        "height": 129.60000610351562,
+        "left": 20,
+        "right": 355.20001220703125,
+        "top": 172.5,
+        "width": 335.20001220703125,
+        "x": 20,
+        "y": 172.5
+      },
+      "height": 5029,
+      "hero": {
+        "bottom": 906.9249877929688,
+        "height": 806.9249877929688,
+        "left": 20,
+        "right": 355.20001220703125,
+        "top": 100,
+        "width": 335.20001220703125,
+        "x": 20,
+        "y": 100
+      },
+      "images": [
+        {
+          "height": 224,
+          "loaded": true,
+          "width": 335
+        },
+        {
+          "height": 187,
+          "loaded": true,
+          "width": 334
+        },
+        {
+          "height": 187,
+          "loaded": true,
+          "width": 334
+        },
+        {
+          "height": 187,
+          "loaded": true,
+          "width": 334
+        }
+      ],
+      "overflow": [],
+      "processGrid": "335.2px",
+      "projectGrid": "335.2px",
+      "scrollWidth": 375,
+      "width": 390
+    }
+  ],
+  "primaryCaseNavigation": true,
+  "processAnchor": true,
+  "consoleErrors": []
+}

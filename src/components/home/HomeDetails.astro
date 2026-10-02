@@ -1,0 +1,73 @@
+---
+import { contacts, process, services } from '../../data/site';
+import { withBase } from '../../data/urls';
+import ServiceVisual from '../ServiceVisual.astro';
+import '../../styles/home-details.css';
+
+const telegram = contacts.find((contact) => contact.href.startsWith('https://t.me/'));
+const email = contacts.find((contact) => contact.href.startsWith('mailto:'));
+---
+
+<section class="home-section home-services" aria-labelledby="home-services-heading">
+  <div class="home-section-heading home-details-intro">
+    <p class="eyebrow">02 / Услуги</p>
+    <h2 id="home-services-heading">Чем могу помочь</h2>
+  </div>
+  <ol class="home-service-rows">
+    {services.map((service, index) => (
+      <li>
+        <a class="home-service-link" href={withBase('/services/')}>
+          <span class="home-detail-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          <div class="home-service-copy">
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+          </div>
+          <ServiceVisual index={index} compact />
+          <span class="home-detail-arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<section id="process" class="home-section home-process" aria-labelledby="home-process-heading">
+  <div class="home-section-heading">
+    <p class="eyebrow">03 / Процесс</p>
+    <h2 id="home-process-heading">От задачи до запуска</h2>
+  </div>
+  <ol class="home-process-steps">
+    {process.map((step, index) => (
+      <li>
+        <span class="home-detail-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+        <h3>{step.title}</h3>
+        <p>{step.description}</p>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<section class="home-section home-about" aria-labelledby="home-about-heading">
+  <div class="home-section-heading home-details-intro">
+    <p class="eyebrow">04 / О себе</p>
+    <h2 id="home-about-heading">Я Егор.</h2>
+  </div>
+  <div class="home-about-copy">
+    <p class="home-about-statement">Продумываю сайт целиком: от первого впечатления до действия посетителя.</p>
+    <p>Занимаюсь дизайном и разработкой. Выбираю визуальный стиль под задачу бизнеса, собираю понятную структуру и адаптирую страницы для разных экранов.</p>
+    <a class="home-context-link" href={withBase('/about/')}>Подробнее обо мне <span aria-hidden="true">↗</span></a>
+  </div>
+</section>
+
+<section class="home-section home-contact" aria-labelledby="home-contact-heading">
+  <p class="eyebrow">05 / Контакт</p>
+  <div class="home-contact-layout">
+    <h2 id="home-contact-heading">Давайте обсудим<br />ваш проект</h2>
+    <div class="home-contact-copy">
+      <p>Расскажите о задаче и о том, какой сайт нужен вашему бизнесу. Начнём с этого.</p>
+      <div class="home-contact-actions">
+        {telegram && <a class="button" href={telegram.href}>Написать в Telegram <span class="button-arrow" aria-hidden="true">↗</span></a>}
+        {email && <a class="home-contact-email" href={email.href}>{email.label}</a>}
+      </div>
+    </div>
+  </div>
+</section>

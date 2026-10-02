@@ -1,0 +1,17 @@
+---
+import { contacts, site } from '../data/site';
+import { withBase } from '../data/urls';
+---
+
+<footer class="site-footer container">
+  <div class="footer-brand">
+    <a class="footer-name" href={withBase('/')}>{site.name}</a>
+    <p>Дизайн и разработка сайтов для бизнеса</p>
+  </div>
+  <nav class="footer-navigation" aria-label="Проекты и контакты">
+    <ul class="footer-links">
+      <li><a href={withBase('/work/')}>Проекты</a></li>
+      {contacts.map((contact) => <li><a href={contact.href}>{contact.label}</a></li>)}
+    </ul>
+  </nav>
+</footer>

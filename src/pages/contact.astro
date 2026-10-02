@@ -1,0 +1,10 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { contacts } from '../data/site';
+import '../styles/interior.css';
+---
+<SiteLayout mainClass="interior-page" title="Контакты" description="Напишите Егору Данилову в Telegram или на email, чтобы обсудить сайт для вашего бизнеса.">
+  <header class="page-intro interior-intro"><p class="eyebrow">05 / Контакты</p><h1>Обсудим<br /><span>ваш проект.</span></h1><p class="lead">Расскажите, какой сайт нужен, для кого он создаётся и что должен помочь сделать. Можно начать с нескольких предложений.</p></header>
+  <ul class="interior-contacts">{contacts.map((contact, index) => <li><a href={contact.href}><span class="eyebrow">{index === 0 ? 'Telegram' : 'Email'}</span><span class="interior-contact-address">{contact.label.replace('Telegram · ', '')}<span aria-hidden="true">↗</span></span></a></li>)}</ul>
+  <section class="section interior-split"><div><p class="eyebrow">Для начала</p><h2>Что можно<br />написать.</h2></div><ol class="interior-process"><li><h3>О бизнесе и задаче</h3><p>Что предлагаете и зачем нужен сайт.</p></li><li><h3>О текущем сайте</h3><p>Если он есть, пришлите ссылку и расскажите, что хотите изменить.</p></li><li><h3>О пожеланиях</h3><p>Примеры, нужные разделы, желаемые сроки и ориентир по бюджету.</p></li></ol></section>
+</SiteLayout>

@@ -1,0 +1,94 @@
+---
+import { site } from '../data/site';
+import { withBase } from '../data/urls';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import '../styles/global.css';
+import '../styles/motion.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  mainClass?: string;
+  noindex?: boolean;
+}
+
+const { title, description = site.description, mainClass, noindex = false } = Astro.props;
+const pageTitle = title ? `${title} — ${site.title}` : site.title;
+const indexable = import.meta.env.PUBLIC_ENABLE_INDEXING === 'true' && Boolean(Astro.site) && !noindex;
+const canonical = Astro.site && !noindex ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const socialImage = Astro.site ? new URL(withBase('/portfolio-preview.jpg'), Astro.site).href : undefined;
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="robots" content={indexable ? 'index, follow' : 'noindex, nofollow'} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content={site.title} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {socialImage && <meta property="og:image" content={socialImage} />}
+    {socialImage && <meta property="og:image:alt" content="Портфолио Егора Данилова — сайты для бизнеса" />}
+    <meta name="twitter:card" content={socialImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <title>{pageTitle}</title>
+    <script is:inline>
+      // Native MPA snapshots are prepared before first paint; only one project participates.
+      (() => {
+        const projectKey = (url) => new URL(url).pathname.match(/\/work\/([a-z0-9-]+)\/?$/)?.[1];
+        const allowed = () => !matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const prepare = (element, promise) => {
+          if (!element) return;
+          element.style.viewTransitionName = element.dataset.projectTransition;
+          const reset = () => element.style.removeProperty('view-transition-name');
+          promise.then(reset, reset);
+        };
+        window.addEventListener('pageswap', (event) => {
+          if (!event.viewTransition) return;
+          // The outgoing ready promise rejects when the browser hides this document.
+          event.viewTransition.ready.catch(() => {});
+          event.viewTransition.finished.catch(() => {});
+          if (!allowed()) return;
+          const key = projectKey(event.activation.entry.url);
+          const element = key
+            ? document.querySelector('.project-card-preview[data-project-transition="project-' + key + '"]')
+            : document.querySelector('.case-cover [data-project-transition]');
+          prepare(element, event.viewTransition.finished);
+        });
+        window.addEventListener('pagereveal', (event) => {
+          if (!event.viewTransition) return;
+          // Interrupted navigation may skip the visual transition, even without a cover.
+          event.viewTransition.ready.catch(() => {});
+          event.viewTransition.finished.catch(() => {});
+          if (!allowed()) return;
+          const from = window.navigation?.activation?.from?.url;
+          const key = from && projectKey(from);
+          const element = document.querySelector('.case-cover [data-project-transition]')
+            || (key && document.querySelector('.project-card-preview[data-project-transition="project-' + key + '"]'));
+          prepare(element, event.viewTransition.ready);
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">К содержанию</a>
+    <SiteHeader />
+    <main id="main" class:list={['container', mainClass]} tabindex="-1">
+      <slot />
+    </main>
+    <SiteFooter />
+    <script>
+      import '../scripts/motion';
+    </script>
+  </body>
+</html>

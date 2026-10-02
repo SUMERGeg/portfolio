@@ -1,0 +1,8 @@
+{
+  "date": "2026-10-02",
+  "handledReadyAndFinishedRejections": true,
+  "normalNoirNavigationErrors": [],
+  "rapidNavigationKnownDiagnostic": "InvalidStateError: Transition was aborted because of invalid state. Page already revealed",
+  "navigationFailed": false,
+  "completeEliminationOfDiagnosticConfirmed": false
+}

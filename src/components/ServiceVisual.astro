@@ -1,0 +1,20 @@
+---
+import { Image } from 'astro:assets';
+import creation from '../assets/services/creation.png';
+import redesign from '../assets/services/redesign.png';
+import extension from '../assets/services/extension.png';
+import '../styles/service-visual.css';
+
+interface Props { index: number; compact?: boolean; }
+const { index, compact = false } = Astro.props;
+const visuals = [
+  { image: creation, alt: 'Каркас страницы превращается в готовый сайт и его мобильную версию', caption: 'Структура → дизайн → адаптивный сайт' },
+  { image: redesign, alt: 'Сравнение перегруженной страницы и обновлённого сайта с ясной структурой', caption: 'До → после: новая подача и структура' },
+  { image: extension, alt: 'К существующему сайту добавляются каталог, форма и новая страница', caption: 'Новые страницы и возможности' },
+];
+const visual = visuals[index];
+---
+{visual && <figure class:list={['service-visual', { 'service-visual-compact': compact }]}>
+  <Image src={visual.image} alt={visual.alt} widths={[320, 640, 960]} sizes={compact ? '(max-width: 480px) calc(100vw - 84px), 192px' : '(max-width: 767px) calc(100vw - 40px), 38vw'} format="webp" quality={82} loading="lazy" />
+  <figcaption>{visual.caption}</figcaption>
+</figure>}

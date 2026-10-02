@@ -1,0 +1,242 @@
+{
+  "capturedAt": "2026-10-02",
+  "note": "Requested browser viewports: desktop1440x900/mobile390x844. Screenshot output may exclude scrollbars/chrome; exact image sizes are recorded separately.",
+  "screenshots": [
+    {
+      "project": "noir",
+      "page": "home",
+      "path": "noir/home-desktop.jpg",
+      "url": "https://noir-rosy.vercel.app/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fullPage": false,
+      "imageWidth": 1425,
+      "imageHeight": 891,
+      "bytes": 116664
+    },
+    {
+      "project": "noir",
+      "page": "home",
+      "path": "noir/home-mobile.jpg",
+      "url": "https://noir-rosy.vercel.app/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fullPage": false,
+      "imageWidth": 375,
+      "imageHeight": 811,
+      "bytes": 39275
+    },
+    {
+      "project": "noir",
+      "page": "pricing",
+      "path": "noir/pricing-mobile.jpg",
+      "url": "https://noir-rosy.vercel.app/pricing",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fullPage": true,
+      "imageWidth": 375,
+      "imageHeight": 4704,
+      "bytes": 147460
+    },
+    {
+      "project": "noir",
+      "page": "pricing",
+      "path": "noir/pricing-desktop.jpg",
+      "url": "https://noir-rosy.vercel.app/pricing",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fullPage": true,
+      "imageWidth": 1424,
+      "imageHeight": 3380,
+      "bytes": 255649
+    },
+    {
+      "project": "sezon",
+      "page": "home",
+      "path": "sezon/home-desktop.jpg",
+      "url": "https://sumergeg.github.io/sezon/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fullPage": false,
+      "imageWidth": 1425,
+      "imageHeight": 891,
+      "bytes": 113163
+    },
+    {
+      "project": "sezon",
+      "page": "home",
+      "path": "sezon/home-mobile.jpg",
+      "url": "https://sumergeg.github.io/sezon/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fullPage": false,
+      "imageWidth": 375,
+      "imageHeight": 811,
+      "bytes": 40018
+    },
+    {
+      "project": "sezon",
+      "page": "catalog",
+      "path": "sezon/catalog-mobile.jpg",
+      "url": "https://sumergeg.github.io/sezon/shop/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fullPage": true,
+      "imageWidth": 375,
+      "imageHeight": 3756,
+      "bytes": 183378
+    },
+    {
+      "project": "sezon",
+      "page": "catalog",
+      "path": "sezon/catalog-desktop.jpg",
+      "url": "https://sumergeg.github.io/sezon/shop/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fullPage": true,
+      "imageWidth": 1424,
+      "imageHeight": 3982,
+      "bytes": 449759
+    },
+    {
+      "project": "sezon",
+      "page": "product",
+      "path": "sezon/product-desktop.jpg",
+      "url": "https://sumergeg.github.io/sezon/shop/first-light/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fullPage": true,
+      "imageWidth": 1424,
+      "imageHeight": 1739,
+      "bytes": 222100
+    },
+    {
+      "project": "sezon",
+      "page": "product",
+      "path": "sezon/product-mobile.jpg",
+      "url": "https://sumergeg.github.io/sezon/shop/first-light/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fullPage": true,
+      "imageWidth": 375,
+      "imageHeight": 2200,
+      "bytes": 103046
+    },
+    {
+      "project": "lostfound",
+      "page": "feed",
+      "path": "lostfound/feed-mobile.jpg",
+      "url": "https://lostfound-theta-puce.vercel.app/ads",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fullPage": false,
+      "imageWidth": 375,
+      "imageHeight": 811,
+      "bytes": 41608
+    },
+    {
+      "project": "lostfound",
+      "page": "feed",
+      "path": "lostfound/feed-desktop.jpg",
+      "url": "https://lostfound-theta-puce.vercel.app/ads",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fullPage": false,
+      "imageWidth": 1425,
+      "imageHeight": 891,
+      "bytes": 95552
+    },
+    {
+      "project": "lostfound",
+      "page": "detail",
+      "path": "lostfound/detail-desktop.jpg",
+      "url": "https://lostfound-theta-puce.vercel.app/ads/demo-mona",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fullPage": true,
+      "imageWidth": 1424,
+      "imageHeight": 1796,
+      "bytes": 181486
+    },
+    {
+      "project": "lostfound",
+      "page": "detail",
+      "path": "lostfound/detail-mobile.jpg",
+      "url": "https://lostfound-theta-puce.vercel.app/ads/demo-mona",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fullPage": true,
+      "imageWidth": 375,
+      "imageHeight": 2314,
+      "bytes": 107100
+    },
+    {
+      "project": "lostfound",
+      "page": "map",
+      "path": "lostfound/map-mobile.jpg",
+      "url": "https://lostfound-theta-puce.vercel.app/map",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fullPage": true,
+      "imageWidth": 375,
+      "imageHeight": 2246,
+      "bytes": 96615
+    },
+    {
+      "project": "lostfound",
+      "page": "map",
+      "path": "lostfound/map-desktop.jpg",
+      "url": "https://lostfound-theta-puce.vercel.app/map",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fullPage": true,
+      "imageWidth": 1424,
+      "imageHeight": 1517,
+      "bytes": 146902
+    }
+  ],
+  "derivedAssets": [
+    {
+      "path": "noir/laptop-preview.jpg",
+      "source": "noir/home-desktop.jpg",
+      "description": "Working CSS device mockup rendered in browser; original screenshot preserved separately."
+    },
+    {
+      "path": "noir/laptop-hero.png",
+      "source": "noir/home-desktop.jpg",
+      "description": "AI-generated illustrative device preview based on the real NOIR screenshot and user-selected portfolio reference; original case screenshots preserved separately."
+    }
+  ]
+}
