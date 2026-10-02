@@ -1,4 +1,5 @@
 ---
+import ArrowIcon from './ArrowIcon.astro';
 import { Image } from 'astro:assets';
 import { projectHref, type Project } from '../data/projects';
 import { projectCovers } from '../data/project-media';
@@ -14,7 +15,7 @@ const cover = projectCovers[project.data.slug];
   <a class="project-card-link" href={projectHref(project)} aria-label={`Посмотреть кейс ${project.data.title}`}>
     <div class="project-card-preview" data-project-transition={`project-${project.data.slug}`}>
       {cover && <Image src={cover.image} alt={cover.alt} widths={[400, 800, 1200]} sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 899px) 65vw, 33vw" format="webp" quality={85} loading="lazy" />}
-      <span class="project-card-arrow" aria-hidden="true">↗</span>
+      <span class="project-card-arrow" aria-hidden="true"><ArrowIcon direction="diagonal" /></span>
     </div>
     <div class="project-card-title"><Heading>{project.data.title}</Heading><span>{project.data.category}</span></div>
     <p class="project-card-summary">{project.data.summary}</p>

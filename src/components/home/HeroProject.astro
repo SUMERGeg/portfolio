@@ -1,4 +1,5 @@
 ---
+import ArrowIcon from '../ArrowIcon.astro';
 import { Image } from 'astro:assets';
 import laptop from '../../assets/projects/noir/laptop-hero.png';
 import { withBase } from '../../data/urls';
@@ -11,7 +12,7 @@ import { withBase } from '../../data/urls';
   <figcaption class="hero-caption">
     <div class="hero-caption-project">
       <span class="hero-caption-line" aria-hidden="true"></span>
-      <div><a href={withBase('/work/noir/')}><strong>NOIR</strong><span aria-hidden="true">↗</span></a><p>Сайт автодетейлинга</p></div>
+      <div><a href={withBase('/work/noir/')}><strong>NOIR</strong><span aria-hidden="true"><ArrowIcon direction="diagonal" /></span></a><p>Сайт автодетейлинга</p></div>
     </div>
     <span class="hero-caption-status">Концептуальный проект</span>
   </figcaption>
