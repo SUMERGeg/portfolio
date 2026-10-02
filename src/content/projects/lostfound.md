@@ -5,7 +5,7 @@ title: Lost&Found
 summary: Сервис потерянных и найденных вещей
 category: Городской сервис
 status: Демоверсия сервиса
-demoUrl: https://lostfound-theta-puce.vercel.app/ads
+demoUrl: https://sumergeg.github.io/lostfound/
 role: Дизайн и разработка
 ---
 
