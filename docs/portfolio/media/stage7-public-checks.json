@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-02",
+  "url": "https://sumergeg.github.io/portfolio/",
+  "workflow": "https://github.com/SUMERGeg/portfolio/actions/runs/37003701018",
+  "workflowResult": "success",
+  "viewports": [
+    {
+      "canonical": "https://sumergeg.github.io/portfolio/",
+      "client": 1425,
+      "heroLoaded": true,
+      "path": "/portfolio/",
+      "robots": "index, follow",
+      "scroll": 1425,
+      "width": 1440
+    },
+    {
+      "canonical": "https://sumergeg.github.io/portfolio/",
+      "client": 1009,
+      "heroLoaded": true,
+      "path": "/portfolio/",
+      "robots": "index, follow",
+      "scroll": 1009,
+      "width": 1024
+    },
+    {
+      "canonical": "https://sumergeg.github.io/portfolio/",
+      "client": 753,
+      "heroLoaded": true,
+      "path": "/portfolio/",
+      "robots": "index, follow",
+      "scroll": 753,
+      "width": 768
+    },
+    {
+      "canonical": "https://sumergeg.github.io/portfolio/",
+      "client": 375,
+      "heroLoaded": true,
+      "path": "/portfolio/",
+      "robots": "index, follow",
+      "scroll": 375,
+      "width": 390
+    }
+  ],
+  "http": {
+    "contentRoutes200": 8,
+    "robots200": true,
+    "sitemap200": true,
+    "socialPreview200": true,
+    "favicon200": true,
+    "unknownRoute404": true,
+    "custom404": true
+  },
+  "interactions": {
+    "mobileMenuToServices": true,
+    "servicesToContact": true,
+    "homeToNoir": true,
+    "noirToWork": true
+  },
+  "knownDiagnostic": "Native View Transition may be aborted with InvalidStateError: Page already revealed during automated navigation; URLs and content remain usable."
+}

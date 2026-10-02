@@ -4,7 +4,7 @@
 
 Проекты портфолио: **NOIR (автодетейлинг), СЕЗОН (цветочный магазин), Lost&Found (городской сервис)**. Визуальное направление — тёмный Digital Grid по выбранному пользователем изображению.
 
-Реализован сайт Astro + TypeScript + CSS с девятью страницами, галереями кейсов, иллюстрациями услуг, анимациями и реальными контактами. [Локальная приёмка](docs/portfolio/ACCEPTANCE-REPORT.md) завершена. [Публикация на GitHub Pages](docs/portfolio/DEPLOYMENT.md) настроена для репозитория SUMERGeg/portfolio.
+Сайт опубликован: **[sumergeg.github.io/portfolio](https://sumergeg.github.io/portfolio/)**. Astro + TypeScript + CSS, девять страниц, галереи кейсов, иллюстрации услуг, анимации и реальные контакты. [Приёмка](docs/portfolio/ACCEPTANCE-REPORT.md) завершена; [публикация и результаты проверки](docs/portfolio/DEPLOYMENT.md).
 
 ## Запуск сайта
 
