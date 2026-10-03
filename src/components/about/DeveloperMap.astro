@@ -1,0 +1,110 @@
+---
+import { Image } from 'astro:assets';
+import silhouette from '../../assets/about/developer-silhouette.png';
+import '../../styles/developer-map.css';
+
+const skills = [
+  { title: 'Понимаю задачу', label: 'Идея и цель', detail: 'Разбираюсь в вашем бизнесе и аудитории. Определяю, что посетитель должен понять и какое действие сделать.', x: 48, y: 20 },
+  { title: 'Продумываю путь', label: 'Структура и дизайн', detail: 'Выстраиваю логику страниц, расставляю акценты и выбираю визуальную подачу под задачу бизнеса.', x: 55, y: 31 },
+  { title: 'Превращаю идею в сайт', label: 'Разработка', detail: 'Собираю адаптивные страницы, навигацию и взаимодействия. Довожу макет до работающего интерфейса.', x: 55, y: 73 },
+  { title: 'Проверяю результат', label: 'Качество и запуск', detail: 'Проверяю мобильную версию, ссылки и основные сценарии. Готовлю сайт к публикации и передаче.', x: 81, y: 62 },
+];
+---
+
+<section class="section developer-section" aria-labelledby="developer-map-heading">
+  <div class="developer-heading"><div><p class="eyebrow">Подход / От мысли к результату</p><h2 id="developer-map-heading">Сайт продуман<br />целиком.</h2></div><p>Соединяю задачу бизнеса, дизайн и разработку. Выберите точку, чтобы узнать больше.</p></div>
+  <developer-map class="developer-map">
+    <svg class="developer-connectors" aria-hidden="true" focusable="false"><g>{skills.map((_, index) => <path data-line={index} pathLength="1" />)}</g></svg>
+    <figure class="developer-figure">
+      <Image src={silhouette} alt="Графитовая иллюстрация разработчика за ноутбуком" widths={[480, 800, 1200]} sizes="(max-width: 899px) calc(100vw - 40px), 50vw" format="webp" quality={88} loading="lazy" />
+      {skills.map((skill, index) => <button class="developer-point" style={`--point-x:${skill.x}%;--point-y:${skill.y}%`} data-point={index} aria-label={skill.title} aria-controls={`developer-detail-${index}`}><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span></button>)}
+      <figcaption class="sr-only">Четыре составляющие моей работы: понимание задачи, проектирование, разработка и проверка результата.</figcaption>
+    </figure>
+    {skills.map((skill, index) => <article class={`developer-note developer-note-${index}`} data-note={index}>
+      <button class="developer-note-button" data-select={index} aria-controls={`developer-detail-${index}`}><span class="developer-note-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><span><span class="developer-note-label">{skill.label}</span><span class="developer-note-title">{skill.title}</span></span><span class="developer-note-toggle" aria-hidden="true">+</span></button>
+      <p id={`developer-detail-${index}`} class="developer-detail">{skill.detail}</p>
+    </article>)}
+  </developer-map>
+</section>
+
+<script>
+  class DeveloperMap extends HTMLElement {
+    private cleanup?: () => void;
+    connectedCallback() {
+      this.cleanup?.();
+      const controller = new AbortController();
+      const { signal } = controller;
+      const notes = Array.from(this.querySelectorAll<HTMLElement>('[data-note]'));
+      const points = Array.from(this.querySelectorAll<HTMLButtonElement>('[data-point]'));
+      const lines = Array.from(this.querySelectorAll<SVGPathElement>('[data-line]'));
+      const svg = this.querySelector<SVGSVGElement>('svg');
+      const motion = matchMedia('(prefers-reduced-motion: reduce)');
+      const desktop = matchMedia('(min-width: 56.25rem)');
+      let frame = 0;
+      const draw = () => {
+        const bounds = this.getBoundingClientRect();
+        svg?.setAttribute('viewBox', `0 0 ${bounds.width} ${bounds.height}`);
+        notes.forEach((note, index) => {
+          const card = note.querySelector('button')!.getBoundingClientRect();
+          const dot = points[index].getBoundingClientRect();
+          const left = index % 2 === 0;
+          const x = (left ? card.right : card.left) - bounds.left;
+          const y = card.top + card.height / 2 - bounds.top;
+          const targetX = dot.left + dot.width / 2 - bounds.left;
+          const targetY = dot.top + dot.height / 2 - bounds.top;
+          const bend = (x + targetX) / 2;
+          lines[index].setAttribute('d', `M ${x} ${y} C ${bend} ${y}, ${bend} ${targetY}, ${targetX} ${targetY}`);
+        });
+      };
+      const scheduleDraw = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(draw); };
+      const select = (index: number) => {
+        this.dataset.active = String(index);
+        notes.forEach((note, position) => {
+          const active = position === index;
+          note.toggleAttribute('data-active', active);
+          note.querySelector('button')?.setAttribute('aria-expanded', String(active));
+          note.querySelector<HTMLElement>('.developer-detail')!.hidden = !active;
+          points[position].setAttribute('aria-pressed', String(active));
+          lines[position].classList.toggle('is-active', active);
+        });
+        if (!motion.matches) {
+          points[index].getAnimations().forEach(animation => animation.cancel());
+          points[index].animate([{ transform: 'translate(-50%, -50%) scale(.88)' }, { transform: 'translate(-50%, -50%) scale(1)' }], { duration: 350, easing: 'cubic-bezier(.16,1,.3,1)' });
+        }
+        scheduleDraw();
+      };
+      const updateControls = () => {
+        points.forEach(point => { point.tabIndex = desktop.matches ? 0 : -1; });
+        scheduleDraw();
+      };
+      this.querySelectorAll<HTMLButtonElement>('[data-select], [data-point]').forEach(button => {
+        button.addEventListener('click', () => select(Number(button.dataset.select ?? button.dataset.point)), { signal });
+        button.addEventListener('keydown', event => {
+          if (!['ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+          event.preventDefault();
+          const current = Number(button.dataset.select ?? button.dataset.point);
+          const next = event.key === 'Home' ? 0 : event.key === 'End' ? notes.length - 1 : (current + (['ArrowDown', 'ArrowRight'].includes(event.key) ? 1 : -1) + notes.length) % notes.length;
+          select(next);
+          notes[next].querySelector<HTMLButtonElement>('button')?.focus();
+        }, { signal });
+      });
+      const resize = new ResizeObserver(scheduleDraw);
+      resize.observe(this);
+      notes.forEach(note => resize.observe(note));
+      const reveal = new IntersectionObserver(entries => {
+        if (entries.some(entry => entry.isIntersecting)) { this.dataset.visible = ''; reveal.disconnect(); }
+      }, { threshold: .2 });
+      reveal.observe(this);
+      desktop.addEventListener('change', updateControls, { signal });
+      motion.addEventListener('change', () => {
+        if (motion.matches) this.querySelectorAll('*').forEach(element => element.getAnimations().forEach(animation => animation.cancel()));
+      }, { signal });
+      this.dataset.enhanced = '';
+      select(0);
+      updateControls();
+      this.cleanup = () => { controller.abort(); resize.disconnect(); reveal.disconnect(); cancelAnimationFrame(frame); };
+    }
+    disconnectedCallback() { this.cleanup?.(); }
+  }
+  if (!customElements.get('developer-map')) customElements.define('developer-map', DeveloperMap);
+</script>
