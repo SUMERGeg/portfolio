@@ -17,7 +17,7 @@ const skills = [
     <svg class="developer-connectors" aria-hidden="true" focusable="false"><g>{skills.map((_, index) => <path data-line={index} pathLength="1" />)}</g></svg>
     <figure class="developer-figure">
       <Image src={silhouette} alt="Графитовая иллюстрация разработчика за ноутбуком" widths={[480, 800, 1200]} sizes="(max-width: 899px) calc(100vw - 40px), 50vw" format="webp" quality={88} loading="lazy" />
-      {skills.map((skill, index) => <button class="developer-point" style={`--point-x:${skill.x}%;--point-y:${skill.y}%`} data-point={index} aria-label={skill.title} aria-controls={`developer-detail-${index}`}><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span></button>)}
+      {skills.map((skill, index) => <button class="developer-point" style={`--point-x:${skill.x}%;--point-y:${skill.y}%`} data-point={index} aria-label={skill.title} aria-controls={`developer-detail-${index}`}><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><span class="developer-point-caption" aria-hidden="true">{skill.title}</span></button>)}
       <figcaption class="sr-only">Четыре составляющие моей работы: понимание задачи, проектирование, разработка и проверка результата.</figcaption>
     </figure>
     {skills.map((skill, index) => <article class={`developer-note developer-note-${index}`} data-note={index}>
