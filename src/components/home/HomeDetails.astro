@@ -1,6 +1,7 @@
 ---
 import ArrowIcon from '../ArrowIcon.astro';
-import { contacts, process, services } from '../../data/site';
+import { contacts, services } from '../../data/site';
+import ProcessRoute from './ProcessRoute.astro';
 import { withBase } from '../../data/urls';
 import ServiceVisual from '../ServiceVisual.astro';
 import '../../styles/home-details.css';
@@ -36,15 +37,7 @@ const email = contacts.find((contact) => contact.href.startsWith('mailto:'));
     <p class="eyebrow">03 / Процесс</p>
     <h2 id="home-process-heading">От задачи до запуска</h2>
   </div>
-  <ol class="home-process-steps">
-    {process.map((step, index) => (
-      <li>
-        <span class="home-detail-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-        <h3>{step.title}</h3>
-        <p>{step.description}</p>
-      </li>
-    ))}
-  </ol>
+  <ProcessRoute />
 </section>
 
 <section class="home-section home-about" aria-labelledby="home-about-heading">

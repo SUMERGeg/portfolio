@@ -1,0 +1,82 @@
+---
+import { process } from '../../data/site';
+import ArrowIcon from '../ArrowIcon.astro';
+import '../../styles/process-route.css';
+---
+
+<process-route class="process-route">
+  <p class="process-hint">Выберите этап — посмотрите, что делаю я, где участвуете вы и что получаем в итоге.</p>
+  <ol class="process-route-list">
+    {process.map((step, index) => (
+      <li>
+        <details open={index === 0}>
+          <summary>
+            <span class="process-node" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+            <span class="process-step-copy"><span class="process-step-title">{step.title}</span><span class="process-step-description">{step.description}</span></span>
+            <span class="process-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="process-body">
+            <section class="process-task"><h3>Что делаю я</h3><p>{step.mine}</p></section>
+            <section class="process-result"><span class="eyebrow">Результат этапа {String(index + 1).padStart(2, '0')}</span><h3>{step.result}</h3><p>{step.output}</p><span class="process-result-arrow"><ArrowIcon /></span></section>
+            <section class="process-task"><h3>Что нужно от вас</h3><p>{step.yours}</p></section>
+          </div>
+        </details>
+      </li>
+    ))}
+  </ol>
+  <div id="process-stage-details" class="process-body process-desktop-panel" role="region" aria-label="Подробности выбранного этапа"></div>
+</process-route>
+
+<script>
+  class ProcessRoute extends HTMLElement {
+    private controller?: AbortController;
+    connectedCallback() {
+      this.controller?.abort();
+      this.controller = new AbortController();
+      const { signal } = this.controller;
+      const steps = Array.from(this.querySelectorAll('details'));
+      const panel = this.querySelector<HTMLElement>('.process-desktop-panel');
+      const desktop = matchMedia('(min-width: 56.25rem)');
+      let selected = 0;
+      this.setAttribute('data-enhanced', '');
+      const select = (index: number) => {
+        selected = index;
+        this.style.setProperty('--route-progress', String(index / (steps.length - 1)));
+        steps.forEach((step, position) => step.toggleAttribute('data-reached', position <= index));
+        const body = steps[index].querySelector('.process-body');
+        if (panel && body) {
+          panel.replaceChildren(...Array.from(body.children).map(child => child.cloneNode(true)));
+          panel.setAttribute('aria-label', `Этап ${index + 1}: ${processTitle(steps[index])}`);
+          if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+            panel.getAnimations().forEach(animation => animation.cancel());
+            panel.animate([{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 380, easing: 'cubic-bezier(.16,1,.3,1)' });
+          }
+        }
+      };
+      select(0);
+      const syncLayout = () => {
+        steps.forEach(step => {
+          const summary = step.querySelector('summary');
+          if (desktop.matches) summary?.setAttribute('aria-controls', 'process-stage-details');
+          else summary?.removeAttribute('aria-controls');
+        });
+        if (desktop.matches) steps[selected].open = true;
+      };
+      syncLayout();
+      desktop.addEventListener('change', syncLayout, { signal });
+      steps.forEach((step, index) => {
+        step.querySelector('summary')?.addEventListener('click', event => {
+          if (desktop.matches && step.open) event.preventDefault();
+        }, { signal });
+        step.addEventListener('toggle', () => {
+          if (!step.open) return;
+          steps.forEach(other => { if (other !== step) other.open = false; });
+          select(index);
+        }, { signal });
+      });
+    }
+    disconnectedCallback() { this.controller?.abort(); }
+  }
+  function processTitle(step: HTMLDetailsElement) { return step.querySelector('.process-step-title')?.textContent ?? ''; }
+  if (!customElements.get('process-route')) customElements.define('process-route', ProcessRoute);
+</script>
