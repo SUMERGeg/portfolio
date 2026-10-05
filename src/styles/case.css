@@ -17,6 +17,7 @@
 .case-gallery { padding-block: var(--space-section) 0; border-block-start: 1px solid var(--color-line); }
 .case-section-heading { margin-block-end: 3rem; }
 .case-section-heading h2 { margin: 0; }
+.case-annotation-hint { max-inline-size: 40rem; margin: 1rem 0 0; font-size: 0.9375rem; }
 .case-screen { margin-block-end: var(--space-section); }
 .case-screen-heading { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; margin-block-end: 2rem; }
 .case-screen-heading h3 { font-size: clamp(1.5rem,2.3vw,2rem); }

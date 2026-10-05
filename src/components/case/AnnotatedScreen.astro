@@ -1,0 +1,145 @@
+---
+import { Image } from 'astro:assets';
+import type { CaseScreen } from '../../data/project-media';
+import type { CaseAnnotation } from '../../data/project-annotations';
+
+interface Props { screen: CaseScreen; projectTitle: string; annotations: CaseAnnotation[]; }
+const { screen, projectTitle, annotations } = Astro.props;
+const prefix = `annotation-${screen.id}`;
+---
+
+<case-annotations>
+  <div class="annotation-stage">
+    <a href={screen.desktop.src} target="_blank" rel="noopener noreferrer" aria-label={`${projectTitle}: ${screen.title}, полный экран для компьютера (в новой вкладке)`}>
+      <Image src={screen.desktop} alt={`${projectTitle}: ${screen.title}, версия для компьютера`} widths={[600, 1000, 1440]} sizes="(max-width: 767px) calc(100vw - 40px), 68vw" format="webp" quality={85} loading="lazy" />
+    </a>
+    {annotations.map(note => (
+      <button class="annotation-marker" type="button" hidden style={`--point-x: ${note.x}%; --point-y: ${note.y}%`} data-note={note.number} aria-label={`Решение ${note.number}: ${note.title}`} aria-controls={`${prefix}-${note.number}`} aria-describedby={`${prefix}-${note.number}-text`} aria-expanded="false">
+        <span>{note.number}</span>
+      </button>
+    ))}
+    <div class="annotation-notes">
+      {annotations.map(note => (
+        <section class="annotation-panel" id={`${prefix}-${note.number}`} data-panel={note.number} role="region" aria-labelledby={`${prefix}-${note.number}-title`}>
+          <div class="annotation-panel-top"><span class="annotation-index">Решение {String(note.number).padStart(2, '0')} / 03</span><button type="button" class="annotation-close" data-close hidden aria-label="Закрыть пояснение"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg></button></div>
+          <h4 id={`${prefix}-${note.number}-title`}>{note.title}</h4>
+          <p id={`${prefix}-${note.number}-text`}>{note.description}</p>
+        </section>
+      ))}
+    </div>
+  </div>
+</case-annotations>
+
+<style>
+  case-annotations { display: block; }
+  .annotation-stage { position: relative; }
+  .annotation-notes { display: grid; gap: 0.75rem; margin-block-start: 1rem; }
+  .annotation-notes:empty { display: none; }
+  .annotation-panel { padding: 1rem 1.25rem 1.25rem; border: 1px solid var(--color-line-strong); border-radius: 0.875rem; background: var(--color-surface); }
+  .annotation-panel-top { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-block-end: 0.625rem; }
+  .annotation-index { color: var(--color-focus); font-size: 0.6875rem; letter-spacing: 0.06em; }
+  .annotation-panel h4 { margin: 0 0 0.625rem; color: var(--color-text); font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.025em; line-height: 1.35; }
+  .annotation-panel p { margin: 0; font-size: 0.875rem; line-height: 1.6; }
+  .annotation-marker { position: absolute; z-index: 2; top: var(--point-y); left: var(--point-x); display: grid; place-items: center; inline-size: 2.75rem; block-size: 2.75rem; padding: 0; border: 0; border-radius: 50%; background: transparent; color: #fff; transform: translate(-50%, -50%); cursor: pointer; }
+  .annotation-marker span { display: grid; place-items: center; inline-size: 2rem; block-size: 2rem; border: 1px solid rgb(255 255 255 / 75%); border-radius: 50%; background: var(--color-accent); box-shadow: 0 2px 12px rgb(0 0 0 / 30%), 0 0 0 4px rgb(30 103 255 / 20%); font-size: 0.8125rem; font-weight: 700; transition: transform 180ms var(--ease-standard), box-shadow 180ms var(--ease-standard); }
+  .annotation-marker[aria-expanded='true'] { z-index: 4; }
+  .annotation-marker[aria-expanded='true'] span { transform: scale(1.1); box-shadow: 0 2px 12px rgb(0 0 0 / 30%), 0 0 0 6px rgb(30 103 255 / 25%); }
+  .annotation-close { display: grid; place-items: center; inline-size: 2.75rem; block-size: 2.75rem; margin: -0.625rem -0.625rem -0.5rem 0; padding: 0; border: 0; border-radius: 50%; color: var(--color-muted); background: transparent; cursor: pointer; }
+  case-annotations[data-ready] .annotation-notes { margin: 0; }
+  case-annotations[data-ready] .annotation-panel { position: absolute; z-index: 3; inline-size: min(19rem, calc(100% - 1rem)); background: #0e151f; box-shadow: 0 12px 40px rgb(0 0 0 / 35%); animation: annotation-appear 180ms var(--ease-standard); }
+  @media (hover: hover) { .annotation-marker:hover span { transform: scale(1.12); } .annotation-close:hover { color: var(--color-text); background: var(--color-surface-strong); } }
+  @keyframes annotation-appear { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) { .annotation-marker span { transition: none; } case-annotations[data-ready] .annotation-panel { animation: none; } }
+</style>
+
+<script>
+  class CaseAnnotations extends HTMLElement {
+    private controller?: AbortController;
+    private observer?: ResizeObserver;
+    private selected?: HTMLButtonElement;
+    private panel?: HTMLElement;
+
+    connectedCallback() {
+      this.controller?.abort();
+      this.observer?.disconnect();
+      const markers = this.querySelectorAll<HTMLButtonElement>('[data-note]');
+      if (!markers.length) return;
+      this.controller = new AbortController();
+      const { signal } = this.controller;
+      this.querySelectorAll<HTMLElement>('[data-panel]').forEach(panel => panel.hidden = true);
+      this.querySelectorAll<HTMLButtonElement>('button').forEach(button => button.hidden = false);
+      this.dataset.ready = '';
+      this.addEventListener('click', event => {
+        if (!(event.target instanceof Element)) return;
+        const marker = event.target.closest<HTMLButtonElement>('[data-note]');
+        if (marker) {
+          if (marker === this.selected) this.close();
+          else this.open(marker);
+        } else if (event.target.closest('[data-close]')) this.close(true);
+        else if (this.panel && event.target.closest('a')) {
+          event.preventDefault();
+          this.close();
+        }
+      }, { signal });
+      document.addEventListener('pointerdown', event => {
+        if (this.selected && event.target instanceof Node && !this.contains(event.target)) this.close();
+      }, { signal });
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && this.selected) this.close(true);
+      }, { signal });
+      document.addEventListener('case-annotation-open', event => {
+        if (event.target !== this) this.close();
+      }, { signal });
+      this.observer = new ResizeObserver(() => this.position());
+      this.observer.observe(this.querySelector('.annotation-stage')!);
+    }
+
+    private open(marker: HTMLButtonElement) {
+      this.close();
+      this.selected = marker;
+      this.panel = this.querySelector<HTMLElement>(`[data-panel="${marker.dataset.note}"]`) ?? undefined;
+      if (!this.panel) return;
+      marker.setAttribute('aria-expanded', 'true');
+      this.panel.hidden = false;
+      this.position();
+      this.dispatchEvent(new CustomEvent('case-annotation-open', { bubbles: true }));
+    }
+
+    private position() {
+      if (!this.panel || !this.selected) return;
+      const stage = this.querySelector<HTMLElement>('.annotation-stage')!;
+      const bounds = stage.getBoundingClientRect();
+      const point = this.selected.getBoundingClientRect();
+      const width = this.panel.offsetWidth;
+      const height = this.panel.offsetHeight;
+      const x = point.left - bounds.left + point.width / 2;
+      const y = point.top - bounds.top + point.height / 2;
+      const below = Math.min(bounds.height - y, window.innerHeight - point.bottom);
+      const above = Math.min(y, point.top);
+      const placeAbove = below < height + 30 && above > below;
+      const beside = bounds.width >= 600 && (x >= width + 38 || bounds.width - x >= width + 38);
+      const candidateLeft = beside ? (x >= width + 38 ? x - width - 30 : x + 30) : x - width / 2;
+      const candidateTop = beside ? y - height / 2 : (placeAbove ? y - height - 30 : y + 30);
+      const left = Math.max(8, Math.min(candidateLeft, bounds.width - width - 8));
+      const minTop = Math.max(8, 12 - bounds.top);
+      const maxTop = Math.min(bounds.height - height - 8, window.innerHeight - height - 12 - bounds.top);
+      const top = minTop <= maxTop ? Math.max(minTop, Math.min(candidateTop, maxTop)) : Math.max(8, Math.min(candidateTop, bounds.height - height - 8));
+      this.panel.style.left = `${left}px`;
+      this.panel.style.top = `${top}px`;
+    }
+
+    private close(restoreFocus = false) {
+      this.selected?.setAttribute('aria-expanded', 'false');
+      if (restoreFocus) this.selected?.focus({ preventScroll: true });
+      if (this.panel) this.panel.hidden = true;
+      this.selected = undefined;
+      this.panel = undefined;
+    }
+
+    disconnectedCallback() {
+      this.controller?.abort();
+      this.observer?.disconnect();
+    }
+  }
+  if (!customElements.get('case-annotations')) customElements.define('case-annotations', CaseAnnotations);
+</script>

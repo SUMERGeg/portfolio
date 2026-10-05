@@ -1,11 +1,13 @@
 ---
 import { Image } from 'astro:assets';
 import type { CaseScreen } from '../../data/project-media';
-interface Props { screens: CaseScreen[]; projectTitle: string; }
-const { screens, projectTitle } = Astro.props;
+import { projectAnnotations } from '../../data/project-annotations';
+import AnnotatedScreen from './AnnotatedScreen.astro';
+interface Props { screens: CaseScreen[]; projectTitle: string; projectSlug: string; }
+const { screens, projectTitle, projectSlug } = Astro.props;
 ---
 <section class="case-gallery" aria-labelledby="screens-heading">
-  <div class="case-section-heading"><p class="eyebrow">02 / Экраны и адаптивность</p><h2 id="screens-heading">Дизайн в деталях</h2></div>
+  <div class="case-section-heading"><p class="eyebrow">02 / Экраны и адаптивность</p><h2 id="screens-heading">Дизайн в деталях</h2><p class="case-annotation-hint">Три решения, которые помогают посетителю. Нажмите на синие отметки на экранах — расскажу, зачем нужна каждая деталь.</p></div>
   {screens.map((screen, index) => (
     <section class="case-screen" aria-labelledby={`screen-${screen.id}`}>
       <header class="case-screen-heading">
@@ -15,9 +17,7 @@ const { screens, projectTitle } = Astro.props;
       <div class="case-screen-pair">
         <figure class="case-screen-desktop">
           <figcaption>Для компьютера</figcaption>
-          <a href={screen.desktop.src} target="_blank" rel="noopener noreferrer" aria-label={`${projectTitle}: ${screen.title}, полный экран для компьютера (в новой вкладке)`}>
-            <Image src={screen.desktop} alt={`${projectTitle}: ${screen.title}, версия для компьютера`} widths={[600, 1000, 1440]} sizes="(max-width: 767px) calc(100vw - 40px), 68vw" format="webp" quality={85} loading="lazy" />
-          </a>
+          <AnnotatedScreen screen={screen} projectTitle={projectTitle} annotations={projectAnnotations[projectSlug]?.[screen.id] ?? []} />
         </figure>
         <figure class="case-screen-mobile">
           <figcaption>Для телефона</figcaption>

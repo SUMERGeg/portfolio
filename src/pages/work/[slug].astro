@@ -47,7 +47,7 @@ const screens = projectScreens[project.data.slug] ?? [];
   </header>
   {cover && <figure class="case-cover"><Image data-project-transition={`project-${project.data.slug}`} src={cover.image} alt={cover.alt} widths={[600, 1000, 1440]} sizes="(max-width: 767px) calc(100vw - 40px), 92vw" format="webp" quality={90} loading="eager" fetchpriority="high" /><figcaption>Первый экран / {project.data.title}</figcaption></figure>}
   <article class="case-narrative section"><Content /></article>
-  <CaseGallery screens={screens} projectTitle={project.data.title} />
+  <CaseGallery screens={screens} projectTitle={project.data.title} projectSlug={project.data.slug} />
   <nav class="section case-navigation" aria-label="Другие проекты">
     <a class="case-next" href={projectHref(nextProject)}><span class="eyebrow">Следующий проект</span><span>{nextProject.data.title} <span aria-hidden="true"><ArrowIcon direction="diagonal" /></span></span></a>
     <a class="button" href={withBase('/contact/')}>Обсудить похожую задачу <span aria-hidden="true"><ArrowIcon /></span></a>
