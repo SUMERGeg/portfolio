@@ -2,6 +2,7 @@
 import ArrowIcon from '../components/ArrowIcon.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import ServiceVisual from '../components/ServiceVisual.astro';
+import SiteBuilder from '../components/builder/SiteBuilder.astro';
 import { services, process } from '../data/site';
 import { withBase } from '../data/urls';
 import '../styles/interior.css';
@@ -12,10 +13,11 @@ const details = [
 ];
 ---
 <SiteLayout mainClass="interior-page" title="Услуги" description="Создание сайтов с нуля, редизайн и доработка сайтов для бизнеса.">
-  <header class="page-intro interior-intro"><p class="eyebrow">02 / Услуги</p><h1>Сайт под<br /><span>вашу задачу.</span></h1><p class="lead">Структура, дизайн и разработка — от первого наброска до готовых страниц. Выбираем объём работы под то, что нужно вашему бизнесу.</p></header>
+  <header class="page-intro interior-intro"><p class="eyebrow">02 / Услуги</p><h1>Сайт под<br /><span>вашу задачу.</span></h1><p class="lead">Структура, дизайн и разработка — от первого наброска до готовых страниц. Выбираем объём работы под то, что нужно вашему бизнесу.</p><a class="text-link" href="#builder">Попробовать конструктор сайта <span aria-hidden="true"><ArrowIcon /></span></a></header>
   <section class="interior-services" aria-label="Направления работы">
     {services.map((service, index) => <article id={service.id} class="interior-service"><div><p class="eyebrow">{String(index + 1).padStart(2, '0')} / Направление</p><h2>{service.title}</h2><p>{details[index].when}</p><ServiceVisual index={index} /></div><div><p class="interior-statement">{service.description}</p><ul class="interior-scope">{details[index].scope.map(item => <li>{item}</li>)}</ul><a class="text-link" href={withBase(`/contact/?service=${service.id}`)}>{service.discussion} <span aria-hidden="true"><ArrowIcon /></span></a></div></article>)}
   </section>
+  <SiteBuilder />
   <section class="section interior-split"><div><p class="eyebrow">Процесс</p><h2>Понятно<br />на каждом шаге.</h2></div><ol class="interior-process">{process.map(step => <li><h3>{step.title}</h3><p>{step.description}</p></li>)}</ol></section>
   <section class="section interior-cta"><div><h2>Начнём с вашей задачи.</h2><p>Объём, сроки и стоимость обсуждаем после знакомства с проектом.</p></div><a class="button" href={withBase('/contact/')}>Обсудить проект <span aria-hidden="true"><ArrowIcon /></span></a></section>
 </SiteLayout>

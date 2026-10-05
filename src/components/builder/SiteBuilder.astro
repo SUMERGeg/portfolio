@@ -1,0 +1,85 @@
+---
+import { builderBlocks, builderDefaults } from '../../data/builder';
+import { withBase } from '../../data/urls';
+import ArrowIcon from '../ArrowIcon.astro';
+import BlockPreview from './BlockPreview.astro';
+import '../../styles/site-builder.css';
+const initial = builderBlocks[0];
+---
+<section id="builder" class="section builder-section" aria-labelledby="builder-heading">
+  <header class="builder-intro">
+    <p class="eyebrow">Попробуйте сами / Набросок сайта</p>
+    <h2 id="builder-heading">Что будет на вашем сайте?</h2>
+    <p class="lead">Выберите разделы — макет соберётся рядом.</p>
+    <p>Это набросок для обсуждения. Дизайн, содержание и детали спроектируем вместе.</p>
+  </header>
+  <site-builder data-contact-url={withBase('/contact/?service=creation')}>
+    <div class="builder-library" aria-label="Добавить раздел">
+      {builderBlocks.map(block => <button type="button" class="builder-tile" data-add={block.id} aria-pressed={builderDefaults.includes(block.id)} aria-label={`${builderDefaults.includes(block.id) ? 'Выбрать' : 'Добавить'}: ${block.title}`} disabled>
+        <BlockPreview type={block.id} mini />
+        <span class="builder-tile-bottom"><span>{block.title}</span><span class="builder-tile-check" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="m4 8 2.5 2.5L12 5" /></svg></span></span>
+      </button>)}
+    </div>
+    <div class="builder-workspace">
+      <section class="builder-structure" aria-labelledby="builder-structure-title">
+        <header class="builder-panel-heading"><h3 id="builder-structure-title">Структура</h3><p>Добавьте блоки и задайте порядок</p></header>
+        <ol class="builder-order" aria-label="Разделы вашего сайта">
+          {builderBlocks.map(block => <li class="builder-row" data-row={block.id} hidden={!builderDefaults.includes(block.id)}>
+            <button type="button" class="builder-row-select" data-select={block.id} aria-pressed={block.id === initial.id} disabled>
+              <svg class="builder-grip" viewBox="0 0 12 18" aria-hidden="true"><circle cx="3" cy="3" r="1"/><circle cx="9" cy="3" r="1"/><circle cx="3" cy="9" r="1"/><circle cx="9" cy="9" r="1"/><circle cx="3" cy="15" r="1"/><circle cx="9" cy="15" r="1"/></svg>
+              <span class="builder-number" aria-hidden="true">{String(builderDefaults.indexOf(block.id) + 1).padStart(2, '0')}</span><span>{block.title}</span>
+            </button>
+            <div class="builder-row-tools">
+              <button type="button" data-move="up" data-id={block.id} class="builder-icon-button" aria-label={`Поднять: ${block.title}`} disabled><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 10 4-4 4 4"/></svg></button>
+              <button type="button" data-move="down" data-id={block.id} class="builder-icon-button" aria-label={`Опустить: ${block.title}`} disabled><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+              <button type="button" data-remove={block.id} class="builder-icon-button" aria-label={`Удалить: ${block.title}`} disabled><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m5 5 6 6M11 5l-6 6"/></svg></button>
+            </div>
+          </li>)}
+        </ol>
+        <p class="builder-empty" data-empty hidden>Начните с первого экрана или любого другого блока из ленты выше.</p>
+        <p class="builder-order-hint">Перетащите строку или используйте кнопки вверх и вниз.</p>
+      </section>
+      <section class="builder-preview" aria-labelledby="builder-preview-title">
+        <header class="builder-preview-heading"><h3 id="builder-preview-title">Предпросмотр</h3><div class="builder-device" role="group" aria-label="Размер макета">
+          <button type="button" data-device-button="desktop" aria-pressed="true" disabled><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 3h14v10H3zM10 13v4M6 17h8"/></svg><span>Компьютер</span></button>
+          <button type="button" data-device-button="mobile" aria-pressed="false" disabled><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="6" y="2" width="8" height="16" rx="1.5"/><path d="M9 15h2"/></svg><span>Телефон</span></button>
+        </div></header>
+        <div class="builder-stage">
+          <div class="builder-canvas" data-device="desktop">
+            <div class="builder-site-nav" aria-hidden="true"><span></span><i></i><i></i><i></i></div>
+            <div class="builder-canvas-blocks">
+              {builderBlocks.map(block => <div class="builder-canvas-block" data-preview={block.id} hidden={!builderDefaults.includes(block.id)}>
+                <button type="button" class="builder-preview-select" data-select={block.id} aria-label={`Пояснение блока: ${block.title}`} aria-pressed={block.id === initial.id} disabled><span>{block.title}</span><span aria-hidden="true">+</span></button>
+                <BlockPreview type={block.id} />
+              </div>)}
+            </div>
+            <p class="builder-canvas-empty" data-empty hidden>Здесь появится ваш макет</p>
+          </div>
+        </div>
+        <p class="builder-preview-caption">Макет можно прокрутить. Текст и изображения заменены на схемы.</p>
+      </section>
+      <aside class="builder-inspector" aria-labelledby="builder-info-title">
+        <div class="builder-info" data-info>
+          <p class="builder-info-kicker">О выбранном блоке</p><h3 id="builder-info-title" data-info-title>{initial.title}</h3>
+          <p class="builder-purpose" data-info-purpose>{initial.purpose}</p>
+          <dl>
+            <div><dt>Что разместим</dt><dd data-info-content>{initial.content}</dd></div>
+            <div><dt>Что подготовить</dt><dd data-info-prepare>{initial.prepare}</dd></div>
+            <div><dt>Следующий шаг клиента</dt><dd data-info-action>{initial.action}</dd></div>
+          </dl>
+        </div>
+        <p class="builder-info-empty" data-info-empty hidden>Выберите блок — здесь расскажу, зачем он нужен и что для него подготовить.</p>
+      </aside>
+    </div>
+    <footer class="builder-footer">
+      <button type="button" class="builder-reset" data-reset disabled><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7a7 7 0 1 1-1 5M4 3v4h4"/></svg>Сбросить</button>
+      <div class="builder-summary"><span data-count>4 раздела</span><p data-advice>Основа готова. Добавьте разделы под вашу задачу.</p></div>
+      <a class="button builder-discuss" data-discuss href={withBase('/contact/?service=creation')}>Обсудить такой сайт <span aria-hidden="true"><ArrowIcon /></span></a>
+    </footer>
+    <p class="builder-status sr-only" role="status" aria-live="polite" data-status></p>
+    <noscript><p class="builder-noscript">Это пример структуры сайта. Включите JavaScript, чтобы добавлять и переставлять разделы.</p></noscript>
+  </site-builder>
+</section>
+<script>
+  import '../../scripts/site-builder';
+</script>

@@ -19,24 +19,28 @@ import '../styles/interior.css';
 
 <script>
   import { services } from '../data/site';
+  import { builderBlocks, validBuilderBlocks } from '../data/builder';
   class ContactContext extends HTMLElement {
     private controller?: AbortController;
     connectedCallback() {
       this.controller?.abort();
       this.controller = new AbortController();
-      const selected = services.find(service => service.id === new URLSearchParams(location.search).get('service'));
+      const params = new URLSearchParams(location.search);
+      const selected = services.find(service => service.id === params.get('service'));
       if (!selected) return;
-      this.querySelector('[data-contact-title]')!.textContent = selected.contactTitle;
-      this.querySelector('[data-contact-hint]')!.textContent = `${selected.contactHint} Готовое ТЗ не нужно — детали обсудим вместе.`;
-      this.querySelector('[data-contact-message]')!.textContent = selected.message;
+      const outline = validBuilderBlocks((params.get('blocks') || '').split(',').slice(0, 6));
+      const message = outline.length ? `${selected.message}\n\nНабросок структуры:\n${outline.map((id, index) => `${index + 1}. ${builderBlocks.find(block => block.id === id)!.title}`).join('\n')}\n\nЭто предварительный набросок — хочу обсудить подходящую структуру.` : selected.message;
+      this.querySelector('[data-contact-title]')!.textContent = outline.length ? 'сайт по вашему наброску.' : selected.contactTitle;
+      this.querySelector('[data-contact-hint]')!.textContent = outline.length ? 'Выбранные разделы уже добавлены в сообщение. Дополните его парой слов о бизнесе — структуру и детали обсудим вместе.' : `${selected.contactHint} Готовое ТЗ не нужно — детали обсудим вместе.`;
+      this.querySelector('[data-contact-message]')!.textContent = message;
       this.querySelector<HTMLElement>('.contact-message')!.hidden = false;
       const email = this.querySelector<HTMLAnchorElement>('[data-email-link]');
-      if (email) email.href = `${email.getAttribute('href')}?subject=${encodeURIComponent(selected.discussion)}&body=${encodeURIComponent(selected.message)}`;
+      if (email) email.href = `${email.getAttribute('href')!.split('?')[0]}?subject=${encodeURIComponent(selected.discussion)}&body=${encodeURIComponent(message)}`;
       const copy = this.querySelector<HTMLButtonElement>('[data-copy-message]');
       const status = this.querySelector<HTMLElement>('[data-copy-status]');
       copy?.addEventListener('click', async () => {
         try {
-          await navigator.clipboard.writeText(selected.message);
+          await navigator.clipboard.writeText(message);
           if (status) status.textContent = 'Сообщение скопировано. Вставьте его в переписку и дополните своими деталями.';
         } catch {
           if (status) status.textContent = 'Не удалось скопировать автоматически. Выделите текст сообщения выше и скопируйте его вручную.';

@@ -1,0 +1,91 @@
+---
+import '../../styles/builder-preview.css';
+
+interface Props {
+  type: string;
+  mini?: boolean;
+}
+
+const { type, mini = false } = Astro.props;
+const items = [0, 1, 2];
+---
+
+<div class:list={['bp', `bp--${type}`, { 'bp--mini': mini }]} aria-hidden="true">
+  {type === 'hero' && (
+    <div class="bp-split">
+      <div class="bp-copy">
+        <span class="bp-eyebrow" />
+        <div class="bp-title-stack"><span class="bp-title" /><span class="bp-title bp-short" /></div>
+        <div class="bp-lines"><span /><span /><span class="bp-short" /></div>
+        <span class="bp-button" />
+      </div>
+      <div class="bp-image bp-hero-image"><span class="bp-image-mark" /></div>
+    </div>
+  )}
+  {type === 'services' && (
+    <>
+      <div class="bp-section-heading"><span class="bp-title" /><span class="bp-line" /></div>
+      <div class="bp-grid">
+        {items.map(() => (
+          <div class="bp-service-card">
+            <span class="bp-service-mark" />
+            <span class="bp-card-title" />
+            <div class="bp-lines"><span /><span class="bp-short" /></div>
+            <span class="bp-card-link" />
+          </div>
+        ))}
+      </div>
+    </>
+  )}
+  {type === 'catalog' && (
+    <>
+      <div class="bp-section-heading"><span class="bp-title" /><span class="bp-line" /></div>
+      <div class="bp-grid bp-catalog-grid">
+        {[...items, ...items].map(() => (
+          <div class="bp-product">
+            <div class="bp-image bp-product-image"><span class="bp-image-mark" /></div>
+            <span class="bp-card-title" />
+            <span class="bp-price" />
+          </div>
+        ))}
+      </div>
+    </>
+  )}
+  {type === 'about' && (
+    <div class="bp-split bp-about-split">
+      <div class="bp-image bp-about-image"><span class="bp-image-mark" /></div>
+      <div class="bp-copy">
+        <span class="bp-eyebrow" />
+        <span class="bp-title" />
+        <div class="bp-lines"><span /><span /><span /><span class="bp-short" /></div>
+        <div class="bp-facts"><span /><span /><span /></div>
+      </div>
+    </div>
+  )}
+  {type === 'reviews' && (
+    <>
+      <div class="bp-section-heading"><span class="bp-title" /><span class="bp-line" /></div>
+      <div class="bp-grid">
+        {items.map(() => (
+          <div class="bp-review-card">
+            <span class="bp-quote-mark" />
+            <div class="bp-lines"><span /><span /><span class="bp-short" /></div>
+            <div class="bp-review-person"><span class="bp-avatar" /><div><span class="bp-card-title" /><span class="bp-line" /></div></div>
+          </div>
+        ))}
+      </div>
+    </>
+  )}
+  {type === 'contact' && (
+    <div class="bp-split">
+      <div class="bp-copy">
+        <span class="bp-title" />
+        <div class="bp-contact-lines">
+          {items.map(() => (<div><span class="bp-contact-dot" /><span class="bp-line" /></div>))}
+        </div>
+        <span class="bp-button" />
+      </div>
+      <div class="bp-map"><span class="bp-map-road bp-map-road--one" /><span class="bp-map-road bp-map-road--two" /><span class="bp-map-pin" /></div>
+    </div>
+  )}
+</div>
