@@ -21,6 +21,20 @@ contact-context { display: block; }
 .service-price .service-price-scope { color: var(--color-text); font-size: .9375rem; line-height: 1.6; }
 .service-price .service-price-note { color: var(--color-muted); font-size: .8125rem; line-height: 1.6; max-inline-size: 48ch; }
 .interior-process { margin: 0; padding-inline-start: 1.5rem; display: grid; gap: 2rem; }
+.service-expertise[id] { scroll-margin-block-start: 1.5rem; }
+.service-expertise header h2 { max-inline-size: 16ch; }
+.service-expertise header .interior-statement { margin: 0; }
+.expertise-rows { list-style: none; padding: 0; margin: clamp(2rem, 5vw, 4rem) 0 0; border-block-end: 1px solid var(--color-line); }
+.expertise-rows li { display: grid; grid-template-columns: 3rem minmax(0, 1fr) minmax(0, 1.6fr); gap: clamp(1rem, 3vw, 3rem); align-items: start; border-block-start: 1px solid var(--color-line); padding-block: 1.75rem; }
+.expertise-number { color: var(--color-accent); font-size: var(--type-meta); font-variant-numeric: tabular-nums; padding-block-start: .3rem; }
+.expertise-rows h3 { font-size: clamp(1.125rem, 1.7vw, 1.5rem); line-height: 1.4; letter-spacing: -.025em; margin: 0; }
+.expertise-rows p { margin: 0; line-height: 1.7; max-inline-size: 62ch; }
+.expertise-notes { margin-block-start: 1.5rem; max-inline-size: 62rem; }
+.expertise-notes p { font-size: .8125rem; line-height: 1.7; margin-block: .5rem 0; }
+@media (max-width: 47.999rem) {
+  .expertise-rows li { grid-template-columns: 1.75rem minmax(0, 1fr); gap: .75rem 1rem; padding-block: 1.5rem; }
+  .expertise-rows li > p { grid-column: 2; font-size: .9375rem; }
+}
 .interior-process li { padding-inline-start: 1rem; }
 .interior-process li::marker { color: var(--color-accent); font-size: var(--type-meta); }
 .interior-process h3 { margin-block-end: 0.5rem; }
