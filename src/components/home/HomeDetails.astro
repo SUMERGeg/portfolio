@@ -23,6 +23,7 @@ const email = contacts.find((contact) => contact.href.startsWith('mailto:'));
           <div class="home-service-copy">
             <h3>{service.title}</h3>
             <p>{service.description}</p>
+            <span class="home-service-price">от {service.startingPrice.toLocaleString('ru-RU')} ₽</span>
           </div>
           <ServiceVisual index={index} compact />
           <span class="home-detail-arrow" aria-hidden="true"><ArrowIcon direction="diagonal" /></span>

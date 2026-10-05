@@ -13,6 +13,13 @@ contact-context { display: block; }
 .interior-statement { max-inline-size: 36rem; font-size: var(--type-lead); color: var(--color-text); line-height: 1.5; }
 .interior-scope { margin-block: 2rem; padding: 0; list-style: none; }
 .interior-scope li { padding-block: 1rem; border-block-end: 1px solid var(--color-line); color: var(--color-muted); }
+.service-price { display: grid; gap: .875rem; margin-block: 1.75rem; max-inline-size: 36rem; }
+.service-price p { margin: 0; }
+.service-price-amount { display: flex; align-items: baseline; gap: .625rem; color: var(--color-text); font-variant-numeric: tabular-nums; }
+.service-price-amount > span { font-size: 1.125rem; color: var(--color-muted); }
+.service-price-amount strong { font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.1; font-weight: 600; letter-spacing: -.045em; white-space: nowrap; }
+.service-price .service-price-scope { color: var(--color-text); font-size: .9375rem; line-height: 1.6; }
+.service-price .service-price-note { color: var(--color-muted); font-size: .8125rem; line-height: 1.6; max-inline-size: 48ch; }
 .interior-process { margin: 0; padding-inline-start: 1.5rem; display: grid; gap: 2rem; }
 .interior-process li { padding-inline-start: 1rem; }
 .interior-process li::marker { color: var(--color-accent); font-size: var(--type-meta); }
