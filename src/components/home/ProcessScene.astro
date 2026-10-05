@@ -15,22 +15,34 @@ import '../../styles/process-scene.css';
 
   <div class="process-scene-workspace">
     <div class="process-scene-notes">
-      <div class="process-scene-note process-scene-note-goal">
-        <span class="process-scene-note-index">01 / задача</span>
-        <span class="process-scene-note-label">Цель сайта</span>
-        <strong>Помочь выбрать услугу<br />и запросить расчёт</strong>
-        <span class="process-scene-note-rule"></span>
-        <span class="process-scene-note-meta">Для владельцев автомобилей</span>
+      <div class="process-scene-notebook-page process-scene-notebook-left">
+        <span class="process-scene-note-index">NOIR / заметки встречи</span>
+        <span class="process-scene-note-label">Что важно?</span>
+        <strong class="process-scene-note-goal">Помочь выбрать услугу<br />и запросить <span>расчёт</span></strong>
+        <div class="process-scene-note-audience">
+          <span class="process-scene-note-label">Для кого</span>
+          <span>Для владельцев<br />автомобилей</span>
+        </div>
+        <span class="process-scene-note-thought">Сначала понять задачу,<br />потом — рисовать сайт.</span>
+        <span class="process-scene-note-page-number">01</span>
       </div>
-      <div class="process-scene-note process-scene-note-pages">
-        <span class="process-scene-note-label">Структура</span>
-        <strong>Главная · услуги<br />проекты · стоимость</strong>
+      <div class="process-scene-notebook-page process-scene-notebook-right">
+        <span class="process-scene-note-index">Набрасываем вместе</span>
+        <span class="process-scene-note-label">Что будет на сайте</span>
+        <strong class="process-scene-note-pages">Главная · услуги<br />проекты · стоимость</strong>
+        <svg class="process-scene-note-sketch" viewBox="0 0 240 110" fill="none">
+          <g stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m8 8 222-2 2 95-224 2V8Z M9 24l222-1 M18 16h24m143-1h13m8 0h13 M22 39l77-1m-76 10 63 1m-64 11h47 M139 34l77 2-1 53-77-1 1-54Z M140 87l26-24 15 13 16-26 18 34" />
+            <path class="process-scene-note-sketch-button" d="m22 76 64-1 1 14-66 1 1-14Z M33 83h35m-5-4 6 4-5 4" />
+          </g>
+        </svg>
+        <div class="process-scene-note-action">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M7 3c-2 13 2 18 18 21m-7-7 7 7-9 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          <span>Главное — кнопка<br /><strong>«Обсудить автомобиль»</strong></span>
+        </div>
+        <span class="process-scene-note-page-number">02</span>
       </div>
-      <div class="process-scene-note process-scene-note-action">
-        <span class="process-scene-note-label">Главное действие</span>
-        <strong>Обсудить<br />автомобиль</strong>
-        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
-      </div>
+      <span class="process-scene-notebook-bookmark"></span>
     </div>
 
     <div class="process-scene-browser">

@@ -16,17 +16,43 @@
 .process-scene-published svg { inline-size: 1.2rem; block-size: 1.2rem; }
 .process-scene-workspace { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); align-items: center; min-inline-size: 0; min-block-size: 0; }
 .process-scene-notes, .process-scene-browser { grid-area: 1 / 1; min-inline-size: 0; min-block-size: 0; transition: opacity 450ms var(--scene-ease), transform 650ms var(--scene-ease); }
-.process-scene-notes { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(.625rem, 2.4cqi, .875rem); inline-size: 90%; margin-inline: auto; }
-.process-scene-note { display: grid; align-content: start; gap: .5rem; padding: clamp(.875rem, 3.6cqi, 1.375rem); border: 1px solid var(--color-line); border-radius: var(--radius-small); background: #111923; }
-.process-scene-note-goal { grid-column: 1 / -1; background: #141e2b; box-shadow: 0 16px 40px rgb(0 0 0 / 14%); }
-.process-scene-note-index { margin-block-end: .35rem; color: #8fb5ff; font-size: .6875rem; letter-spacing: .07em; }
-.process-scene-note-label { color: var(--color-muted); font-size: clamp(.6875rem, 2.2cqi, .8125rem); }
-.process-scene-note strong { font-size: clamp(.8125rem, 2.7cqi, 1rem); line-height: 1.4; font-weight: 500; letter-spacing: -.02em; }
-.process-scene-note-goal strong { font-size: clamp(1.0625rem, 4cqi, 1.625rem); line-height: 1.25; }
-.process-scene-note-rule { block-size: 1px; margin-block: .25rem; background: var(--color-line); }
-.process-scene-note-meta { color: var(--color-muted); font-size: clamp(.6875rem, 2.1cqi, .75rem); }
-.process-scene-note-action { position: relative; background: #112347; border-color: rgb(83 137 255 / 22%); }
-.process-scene-note-action svg { inline-size: 1.125rem; block-size: 1.125rem; position: absolute; inset-inline-end: .875rem; inset-block-end: .875rem; color: #9bbfff; }
+.process-scene-notes {
+  position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  inline-size: 94%; margin-inline: auto; padding: 5px 5px 9px;
+  border: 1px solid #354253; border-radius: 9px 12px 12px 9px;
+  background: #263342; color: #283447; transform: rotate(-1deg);
+  box-shadow: 0 24px 40px rgb(0 0 0 / 28%), 0 2px 0 #17202b;
+}
+.process-scene-notebook-page {
+  position: relative; display: flex; flex-direction: column; gap: clamp(.5rem, 1.9cqi, .875rem);
+  min-inline-size: 0; padding: clamp(.875rem, 3.8cqi, 1.75rem) clamp(.75rem, 3.5cqi, 1.5rem) clamp(1.75rem, 5cqi, 2.25rem);
+  background-color: #e7e5df;
+  background-image: repeating-linear-gradient(0deg, transparent 0 23px, rgb(67 86 114 / 9%) 23px 24px);
+  box-shadow: 0 2px 0 #c2c3bf, 0 4px 0 #e2e0d9;
+}
+.process-scene-notebook-left {
+  border-radius: 5px 0 0 5px;
+  background-image: linear-gradient(90deg, transparent 85%, rgb(67 64 52 / 14%)), repeating-linear-gradient(0deg, transparent 0 23px, rgb(67 86 114 / 9%) 23px 24px);
+}
+.process-scene-notebook-right {
+  border-radius: 0 7px 7px 0;
+  background-image: linear-gradient(90deg, rgb(67 64 52 / 18%), transparent 12%), repeating-linear-gradient(0deg, transparent 0 23px, rgb(67 86 114 / 9%) 23px 24px);
+}
+.process-scene-notes::after { content: ''; position: absolute; inset: 5px auto 9px 50%; inline-size: 1px; background: rgb(60 61 55 / 20%); }
+.process-scene-note-index { color: #657082; font-size: clamp(.5625rem, 1.8cqi, .6875rem); letter-spacing: .04em; margin-block-end: .25rem; }
+.process-scene-note-label { color: #335a94; font: italic clamp(.8125rem, 2.8cqi, 1.125rem)/1.2 Georgia, serif; }
+.process-scene-notes strong { font-weight: 500; letter-spacing: -.025em; }
+.process-scene-note-goal { font-size: clamp(.8125rem, 3.1cqi, 1.375rem); line-height: 1.45; }
+.process-scene-note-goal span { text-decoration: underline; text-decoration-color: #316bdd; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.process-scene-note-audience { display: grid; gap: .4rem; margin-block-start: .25rem; font-size: clamp(.6875rem, 2.4cqi, .9375rem); line-height: 1.5; }
+.process-scene-note-thought { margin-block-start: auto; padding-block-start: .5rem; color: #596573; font: italic clamp(.75rem, 2.4cqi, 1rem)/1.5 Georgia, serif; }
+.process-scene-note-pages { font-size: clamp(.6875rem, 2.5cqi, 1rem); line-height: 1.5; }
+.process-scene-note-sketch { inline-size: 100%; color: #6c7788; transform: rotate(1deg); }
+.process-scene-note-sketch-button { stroke: #316bdd; }
+.process-scene-note-action { display: flex; align-items: flex-start; gap: .25rem; color: #335a94; font-size: clamp(.625rem, 2.2cqi, .875rem); line-height: 1.5; }
+.process-scene-note-action svg { flex: 0 0 15%; inline-size: 15%; margin-block-start: -.4rem; }
+.process-scene-note-page-number { position: absolute; inset-block-end: .5rem; inset-inline-end: 1rem; color: #89909a; font-size: .625rem; }
+.process-scene-notebook-bookmark { position: absolute; inset-block-start: 0; inset-inline-end: 8%; inline-size: clamp(.5rem, 2cqi, .875rem); block-size: clamp(1.25rem, 5cqi, 2rem); background: #2464d7; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%); }
 .process-scene-browser { display: grid; grid-template-rows: auto minmax(0, 1fr); inline-size: 100%; block-size: 100%; border: 1px solid var(--color-line-strong); border-radius: 12px; background: #0b0e12; overflow: hidden; box-shadow: 0 20px 50px rgb(0 0 0 / 22%); opacity: 0; transform: translateY(10px) scale(.965); pointer-events: none; }
 .process-scene-toolbar { display: flex; align-items: center; justify-content: space-between; gap: .75rem; block-size: clamp(1.875rem, 6cqi, 2.25rem); padding-inline: clamp(.625rem, 2.5cqi, .875rem); background: #171e28; border-block-end: 1px solid var(--color-line); }
 .process-scene-window-dots { display: flex; gap: .25rem; }
@@ -86,9 +112,9 @@ process-route[data-stage="3"] .process-scene-published { opacity: 1; transform: 
   .process-scene { gap: .5rem; aspect-ratio: 1.05; min-block-size: 22rem; }
   .process-scene-browser { block-size: auto; aspect-ratio: 1.4; }
   .process-scene-notes { inline-size: 94%; }
-  .process-scene-note { gap: .4rem; }
-  .process-scene-note-index { margin-block-end: 0; }
-  .process-scene-note-rule { margin-block: .1rem; }
+  .process-scene-notebook-page { gap: .45rem; padding: .875rem .625rem 1.5rem; }
+  .process-scene-note-index { margin-block-end: 0; letter-spacing: 0; }
+  .process-scene-note-thought { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .process-scene *, .process-scene *::before, .process-scene *::after { transition: none !important; animation: none !important; }
