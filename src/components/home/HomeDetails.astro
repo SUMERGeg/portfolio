@@ -18,7 +18,7 @@ const email = contacts.find((contact) => contact.href.startsWith('mailto:'));
   <ol class="home-service-rows">
     {services.map((service, index) => (
       <li>
-        <a class="home-service-link" href={withBase('/services/')}>
+        <a class="home-service-link" href={withBase(`/services/#${service.id}`)}>
           <span class="home-detail-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
           <div class="home-service-copy">
             <h3>{service.title}</h3>

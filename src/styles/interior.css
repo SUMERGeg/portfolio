@@ -3,6 +3,12 @@
 .interior-intro .lead { max-inline-size: 40rem; }
 .interior-split, .interior-service { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.6fr); gap: clamp(2rem,7vw,7rem); }
 .interior-service { padding-block: var(--space-section); border-block-start: 1px solid var(--color-line); }
+.interior-service[id] { scroll-margin-block-start: 1.5rem; }
+contact-context { display: block; }
+.contact-message { padding: clamp(1.25rem, 3vw, 2rem); margin-block-end: 2rem; border: 1px solid var(--color-line); border-radius: var(--radius-small); background: var(--color-surface); }
+.contact-message-text { max-inline-size: 48rem; color: var(--color-text); user-select: text; }
+.contact-message-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem 1.5rem; }
+.contact-message-status { flex: 1 1 18rem; margin: 0; font-size: .875rem; }
 .interior-service > div:first-child > p:last-child { max-inline-size: 27rem; }
 .interior-statement { max-inline-size: 36rem; font-size: var(--type-lead); color: var(--color-text); line-height: 1.5; }
 .interior-scope { margin-block: 2rem; padding: 0; list-style: none; }
