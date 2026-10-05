@@ -4,30 +4,32 @@ import '../../styles/builder-preview.css';
 interface Props {
   type: string;
   mini?: boolean;
+  variant?: string;
 }
 
-const { type, mini = false } = Astro.props;
+const defaults: Record<string, string> = { hero: 'split', services: 'cards', catalog: 'grid', about: 'image', reviews: 'cards', contact: 'map' };
+const { type, mini = false, variant = defaults[Astro.props.type] } = Astro.props;
 const items = [0, 1, 2];
 ---
 
-<div class:list={['bp', `bp--${type}`, { 'bp--mini': mini }]} aria-hidden="true">
+<div class:list={['bp', `bp--${type}`, { 'bp--mini': mini }]} data-variant={variant} aria-hidden="true">
   {type === 'hero' && (
     <div class="bp-split">
-      <div class="bp-copy">
+      <div class="bp-copy bp-layout-part">
         <span class="bp-eyebrow" />
         <div class="bp-title-stack"><span class="bp-title" /><span class="bp-title bp-short" /></div>
         <div class="bp-lines"><span /><span /><span class="bp-short" /></div>
-        <span class="bp-button" />
+        <span class="bp-button bp-layout-part" />
       </div>
-      <div class="bp-image bp-hero-image"><span class="bp-image-mark" /></div>
+      <div class="bp-image bp-hero-image bp-layout-part"><span class="bp-image-mark" /></div>
     </div>
   )}
   {type === 'services' && (
     <>
       <div class="bp-section-heading"><span class="bp-title" /><span class="bp-line" /></div>
-      <div class="bp-grid">
+      <div class="bp-grid bp-layout-part">
         {items.map(() => (
-          <div class="bp-service-card">
+          <div class="bp-service-card bp-layout-part">
             <span class="bp-service-mark" />
             <span class="bp-card-title" />
             <div class="bp-lines"><span /><span class="bp-short" /></div>
@@ -40,9 +42,9 @@ const items = [0, 1, 2];
   {type === 'catalog' && (
     <>
       <div class="bp-section-heading"><span class="bp-title" /><span class="bp-line" /></div>
-      <div class="bp-grid bp-catalog-grid">
+      <div class="bp-grid bp-catalog-grid bp-layout-part">
         {[...items, ...items].map(() => (
-          <div class="bp-product">
+          <div class="bp-product bp-layout-part">
             <div class="bp-image bp-product-image"><span class="bp-image-mark" /></div>
             <span class="bp-card-title" />
             <span class="bp-price" />
@@ -53,8 +55,8 @@ const items = [0, 1, 2];
   )}
   {type === 'about' && (
     <div class="bp-split bp-about-split">
-      <div class="bp-image bp-about-image"><span class="bp-image-mark" /></div>
-      <div class="bp-copy">
+      <div class="bp-image bp-about-image bp-layout-part"><span class="bp-image-mark" /></div>
+      <div class="bp-copy bp-layout-part">
         <span class="bp-eyebrow" />
         <span class="bp-title" />
         <div class="bp-lines"><span /><span /><span /><span class="bp-short" /></div>
@@ -65,9 +67,9 @@ const items = [0, 1, 2];
   {type === 'reviews' && (
     <>
       <div class="bp-section-heading"><span class="bp-title" /><span class="bp-line" /></div>
-      <div class="bp-grid">
+      <div class="bp-grid bp-layout-part">
         {items.map(() => (
-          <div class="bp-review-card">
+          <div class="bp-review-card bp-layout-part">
             <span class="bp-quote-mark" />
             <div class="bp-lines"><span /><span /><span class="bp-short" /></div>
             <div class="bp-review-person"><span class="bp-avatar" /><div><span class="bp-card-title" /><span class="bp-line" /></div></div>
@@ -78,14 +80,15 @@ const items = [0, 1, 2];
   )}
   {type === 'contact' && (
     <div class="bp-split">
-      <div class="bp-copy">
+      <div class="bp-copy bp-layout-part">
         <span class="bp-title" />
         <div class="bp-contact-lines">
           {items.map(() => (<div><span class="bp-contact-dot" /><span class="bp-line" /></div>))}
         </div>
-        <span class="bp-button" />
+        <span class="bp-button bp-layout-part" />
       </div>
-      <div class="bp-map"><span class="bp-map-road bp-map-road--one" /><span class="bp-map-road bp-map-road--two" /><span class="bp-map-pin" /></div>
+      <div class="bp-map bp-layout-part"><span class="bp-map-road bp-map-road--one" /><span class="bp-map-road bp-map-road--two" /><span class="bp-map-pin" /></div>
+      <div class="bp-form bp-layout-part"><span class="bp-form-field" /><span class="bp-form-field" /><span class="bp-form-field bp-form-field--message" /><span class="bp-button" /></div>
     </div>
   )}
 </div>

@@ -60,6 +60,49 @@
 .bp-map-road--one { inline-size: 160%; block-size: 9px; inset-block-start: 40%; inset-inline-start: -20%; transform: rotate(-28deg); }
 .bp-map-road--two { inline-size: 9px; block-size: 150%; inset-block-start: -25%; inset-inline-start: 48%; transform: rotate(-18deg); }
 .bp-map-pin { position: absolute; inline-size: 13px; block-size: 13px; inset-block-start: 42%; inset-inline-start: 49%; border: 3px solid #a5adbb; border-radius: 50% 50% 50% 0; background: #fafaf8; transform: rotate(-45deg); }
+.bp-form { display: none; min-inline-size: 0; }
+
+.bp--hero[data-variant='centered'] .bp-split,
+.bp--hero[data-variant='compact'] .bp-split,
+.bp--about[data-variant='facts'] .bp-split { grid-template-columns: minmax(0, 1fr); }
+.bp--hero[data-variant='centered'] .bp-hero-image,
+.bp--hero[data-variant='compact'] .bp-hero-image,
+.bp--about[data-variant='facts'] .bp-about-image { display: none; }
+.bp--hero[data-variant='centered'] .bp-copy { align-items: center; inline-size: 100%; max-inline-size: 80%; margin-inline: auto; padding-block: var(--bp-space); }
+.bp--hero[data-variant='centered'] .bp-title-stack { justify-items: center; }
+.bp--hero[data-variant='centered'] .bp-title { block-size: calc(var(--bp-heading) * 1.35); }
+.bp--hero[data-variant='centered'] .bp-lines { justify-items: center; inline-size: 85%; }
+.bp--hero[data-variant='centered'] .bp-button { inline-size: 28%; }
+.bp--hero[data-variant='compact'] .bp-copy { display: grid; grid-template-columns: minmax(0, 1fr) .3fr; align-items: center; column-gap: calc(var(--bp-space) * 2); }
+.bp--hero[data-variant='compact'] .bp-eyebrow { grid-column: 1 / -1; inline-size: 18%; }
+.bp--hero[data-variant='compact'] .bp-lines { display: none; }
+.bp--hero[data-variant='compact'] .bp-button { inline-size: 100%; block-size: calc(var(--bp-bar) * 5); }
+.bp--services[data-variant='rows'] .bp-grid { grid-template-columns: minmax(0, 1fr); gap: calc(var(--bp-space) * .6); }
+.bp--services[data-variant='rows'] .bp-service-card { display: grid; grid-template-columns: calc(var(--bp-bar) * 4) 1fr 1.3fr .3fr; align-items: center; padding-block: calc(var(--bp-card-pad) * .8); }
+.bp--services[data-variant='rows'] .bp-card-title,
+.bp--services[data-variant='rows'] .bp-card-link { inline-size: 85%; }
+.bp--services[data-variant='rows'] .bp-service-mark { inline-size: calc(var(--bp-bar) * 3); block-size: calc(var(--bp-bar) * 3); }
+.bp--catalog[data-variant='showcase'] .bp-catalog-grid { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); }
+.bp--catalog[data-variant='showcase'] .bp-product:first-child { grid-row: span 2; }
+.bp--catalog[data-variant='showcase'] .bp-product:first-child .bp-product-image { block-size: calc(var(--bp-image-height) * 1.2); }
+.bp--catalog[data-variant='showcase'] .bp-product:nth-child(n + 4) { display: none; }
+.bp--about[data-variant='facts'] .bp-copy { gap: calc(var(--bp-space) * 1.2); }
+.bp--about[data-variant='facts'] .bp-title { inline-size: 55%; }
+.bp--about[data-variant='facts'] .bp-lines { inline-size: 80%; }
+.bp--about[data-variant='facts'] .bp-facts { inline-size: 100%; padding-block-start: calc(var(--bp-space) * .5); }
+.bp--about[data-variant='facts'] .bp-facts span { block-size: calc(var(--bp-bar) * 5); max-inline-size: 25%; position: relative; margin-block-end: calc(var(--bp-bar) * 2); background: #a9afbb; }
+.bp--about[data-variant='facts'] .bp-facts span::after { content: ''; position: absolute; inset-block-start: calc(100% + var(--bp-bar)); inline-size: 75%; block-size: var(--bp-bar); border-radius: 2px; background: #d8dce4; }
+.bp--reviews[data-variant='quote'] .bp-grid { grid-template-columns: minmax(0, 1fr); }
+.bp--reviews[data-variant='quote'] .bp-review-card:nth-child(n + 2) { display: none; }
+.bp--reviews[data-variant='quote'] .bp-review-card { padding: calc(var(--bp-card-pad) * 1.5); gap: var(--bp-space); }
+.bp--reviews[data-variant='quote'] .bp-quote-mark { inline-size: calc(var(--bp-bar) * 4); block-size: calc(var(--bp-bar) * 3); }
+.bp--reviews[data-variant='quote'] .bp-lines span { block-size: calc(var(--bp-bar) * 1.2); }
+.bp--reviews[data-variant='quote'] .bp-review-person { inline-size: 45%; }
+.bp--contact[data-variant='form'] .bp-map { display: none; }
+.bp--contact[data-variant='form'] .bp-form { display: grid; gap: calc(var(--bp-space) * .65); padding: var(--bp-card-pad); border: 1px solid #e7e9ee; border-radius: 5px; background: #f2f3f5; }
+.bp-form-field { min-inline-size: 0; block-size: calc(var(--bp-bar) * 4); background: #fafaf8; border: 1px solid #d8dce4; border-radius: 3px; }
+.bp-form-field--message { block-size: calc(var(--bp-bar) * 7); }
+.bp-form .bp-button { inline-size: 40%; }
 
 .bp--mini {
   --bp-space: 5px;
@@ -88,6 +131,21 @@
 .bp--mini .bp-map-road--two { inline-size: 4px; }
 .bp--mini .bp-map-pin { inline-size: 7px; block-size: 7px; border-width: 2px; }
 .bp--mini .bp-product-image .bp-image-mark { display: none; }
+.bp--mini.bp--hero[data-variant='centered'] .bp-copy { gap: 4px; padding-block: 0; }
+.bp--mini.bp--services[data-variant='rows'] .bp-section-heading .bp-line { display: none; }
+.bp--mini.bp--services[data-variant='rows'] .bp-service-card { padding-block: 2px; }
+.bp--mini.bp--services[data-variant='rows'] .bp-lines { gap: 2px; }
+.bp--mini.bp--catalog[data-variant='showcase'] .bp-product:first-child .bp-product-image { block-size: 26px; }
+.bp--mini.bp--about[data-variant='facts'] .bp-copy { gap: 4px; }
+.bp--mini.bp--about[data-variant='facts'] .bp-lines { gap: 2px; }
+.bp--mini.bp--about[data-variant='facts'] .bp-lines span:nth-child(n + 3) { display: none; }
+.bp--mini.bp--about[data-variant='facts'] .bp-facts { padding-block-start: 0; }
+.bp--mini.bp--reviews[data-variant='quote'] .bp-section-heading .bp-line { display: none; }
+.bp--mini.bp--reviews[data-variant='quote'] .bp-review-card:first-child { display: grid; grid-template-columns: 8px minmax(0, 1fr); gap: 4px; padding: 4px; }
+.bp--mini.bp--reviews[data-variant='quote'] .bp-review-person { grid-column: 2; inline-size: 70%; }
+.bp--mini.bp--reviews[data-variant='quote'] .bp-quote-mark { inline-size: 6px; block-size: 5px; }
+.bp--mini .bp-form-field { block-size: 7px; border-radius: 2px; }
+.bp--mini .bp-form-field--message { block-size: 11px; }
 
 .builder-canvas[data-device='mobile'] .bp:not(.bp--mini) { --bp-pad: 16px; --bp-space: 12px; --bp-image-height: 105px; }
 .builder-canvas[data-device='mobile'] .bp:not(.bp--mini) .bp-split { grid-template-columns: minmax(0, 1fr); }
@@ -100,3 +158,13 @@
 .builder-canvas[data-device='mobile'] .bp:not(.bp--mini) .bp-service-card .bp-card-link { grid-column: 2; }
 .builder-canvas[data-device='mobile'] .bp:not(.bp--mini) .bp-section-heading .bp-title { inline-size: 55%; }
 .builder-canvas[data-device='mobile'] .bp:not(.bp--mini) .bp-section-heading .bp-line { inline-size: 72%; }
+.builder-canvas[data-device='mobile'] .bp--hero[data-variant='centered']:not(.bp--mini) .bp-copy { max-inline-size: 100%; }
+.builder-canvas[data-device='mobile'] .bp--hero[data-variant='compact']:not(.bp--mini) .bp-copy { grid-template-columns: minmax(0, 1fr); }
+.builder-canvas[data-device='mobile'] .bp--hero[data-variant='compact']:not(.bp--mini) .bp-button { inline-size: 48%; }
+.builder-canvas[data-device='mobile'] .bp--services[data-variant='rows']:not(.bp--mini) .bp-service-card { grid-template-columns: 16px minmax(0, 1fr) .3fr; }
+.builder-canvas[data-device='mobile'] .bp--services[data-variant='rows']:not(.bp--mini) .bp-service-card .bp-lines { grid-column: 2; }
+.builder-canvas[data-device='mobile'] .bp--services[data-variant='rows']:not(.bp--mini) .bp-service-card .bp-card-link { grid-column: 3; grid-row: 1 / span 2; }
+.builder-canvas[data-device='mobile'] .bp--catalog[data-variant='showcase']:not(.bp--mini) .bp-catalog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.builder-canvas[data-device='mobile'] .bp--catalog[data-variant='showcase']:not(.bp--mini) .bp-product:first-child { grid-column: 1 / -1; grid-row: auto; }
+.builder-canvas[data-device='mobile'] .bp--catalog[data-variant='showcase']:not(.bp--mini) .bp-product:first-child .bp-product-image { block-size: 125px; }
+.builder-canvas[data-device='mobile'] .bp--reviews[data-variant='quote']:not(.bp--mini) .bp-review-person { inline-size: 80%; }

@@ -1,5 +1,5 @@
 ---
-import { builderBlocks, builderDefaults } from '../../data/builder';
+import { builderBlocks, builderDefaults, builderLayouts } from '../../data/builder';
 import { withBase } from '../../data/urls';
 import ArrowIcon from '../ArrowIcon.astro';
 import BlockPreview from './BlockPreview.astro';
@@ -62,6 +62,17 @@ const initial = builderBlocks[0];
         <div class="builder-info" data-info>
           <p class="builder-info-kicker">О выбранном блоке</p><h3 id="builder-info-title" data-info-title>{initial.title}</h3>
           <p class="builder-purpose" data-info-purpose>{initial.purpose}</p>
+          <fieldset class="builder-layout-picker">
+            <legend>Вариант компоновки</legend>
+            {builderBlocks.map(block => <div class="builder-layout-options" data-layout-group={block.id} hidden={block.id !== initial.id}>
+              {builderLayouts[block.id].map((layout, index) => <button type="button" class="builder-layout-option" data-layout={layout.id} data-block={block.id} aria-label={`${block.title}: ${layout.title}`} aria-pressed={index === 0} disabled>
+                <BlockPreview type={block.id} variant={layout.id} mini />
+                <span>{layout.title}</span>
+              </button>)}
+            </div>)}
+            <p class="builder-layout-description" data-layout-description>{builderLayouts.hero[0].description}</p>
+            <a class="builder-jump-preview" href="#builder-preview-title">Посмотреть в макете <span aria-hidden="true"><ArrowIcon /></span></a>
+          </fieldset>
           <dl>
             <div><dt>Что разместим</dt><dd data-info-content>{initial.content}</dd></div>
             <div><dt>Что подготовить</dt><dd data-info-prepare>{initial.prepare}</dd></div>

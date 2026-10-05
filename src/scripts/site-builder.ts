@@ -1,9 +1,10 @@
-import { builderBlocks, builderDefaults, builderStorageKey, validBuilderBlocks, type BuilderBlockId } from '../data/builder';
+import { builderBlocks, builderDefaults, builderStorageKey, validBuilderBlocks, validBuilderLayouts, getBuilderLayout, type BuilderBlockId } from '../data/builder';
 
 class SiteBuilder extends HTMLElement {
   private order: BuilderBlockId[] = [...builderDefaults];
   private selected: BuilderBlockId | null = 'hero';
   private device = 'desktop';
+  private layouts = validBuilderLayouts(null);
   private controller?: AbortController;
   private dragged: BuilderBlockId | null = null;
   private pointer?: { id: number; startX: number; startY: number; source: HTMLElement; block: BuilderBlockId };
@@ -20,6 +21,7 @@ class SiteBuilder extends HTMLElement {
         this.order = validBuilderBlocks(saved.order);
         this.selected = this.order.includes(saved.selected) ? saved.selected : this.order[0] ?? null;
         this.device = saved.device === 'mobile' ? 'mobile' : 'desktop';
+        this.layouts = validBuilderLayouts(saved.layouts);
       }
     } catch { /* A blocked or unavailable storage never prevents editing. */ }
     this.querySelectorAll<HTMLButtonElement>('button').forEach(button => button.disabled = false);
@@ -50,6 +52,13 @@ class SiteBuilder extends HTMLElement {
     if (added) {
       if (!this.order.includes(added.id)) { this.order.push(added.id); this.announce(`Добавлен раздел «${added.title}».`); }
       this.selected = added.id;
+    } else if (control.dataset.layout) {
+      const block = this.block(control.dataset.block);
+      if (!block || block.id !== this.selected || !this.order.includes(block.id)) return;
+      const layout = getBuilderLayout(block.id, control.dataset.layout);
+      if (this.layouts[block.id] === layout.id) return;
+      this.layouts[block.id] = layout.id;
+      this.announce(`«${block.title}»: компоновка «${layout.title}».`);
     } else if (control.dataset.select) {
       this.selected = this.block(control.dataset.select)?.id ?? this.selected;
     } else if (control.dataset.remove) {
@@ -75,6 +84,7 @@ class SiteBuilder extends HTMLElement {
       this.order = [...builderDefaults];
       this.selected = 'hero';
       this.device = 'desktop';
+      this.layouts = validBuilderLayouts(null);
       this.announce('Восстановлена начальная структура из четырёх разделов.');
     } else return;
     this.render();
@@ -84,6 +94,14 @@ class SiteBuilder extends HTMLElement {
     const items = [...this.querySelectorAll<HTMLElement>('[data-row], [data-preview]')];
     items.forEach(item => item.getAnimations().forEach(animation => animation.cancel()));
     const before = new Map(items.filter(item => !item.hidden).map(item => [item, item.getBoundingClientRect()]));
+    const changedLayouts = items.filter(item => item.dataset.preview && !item.hidden && item.querySelector<HTMLElement>('.bp')!.dataset.variant !== this.layouts[item.dataset.preview as BuilderBlockId]);
+    const layoutParts = changedLayouts.flatMap(item => [...item.querySelectorAll<HTMLElement>('.bp-copy, .bp-hero-image, .bp-service-card, .bp-product, .bp-about-image, .bp-review-card, .bp-map, .bp-form')]);
+    layoutParts.forEach(part => part.getAnimations().forEach(animation => animation.cancel()));
+    const layoutBefore = new Map(layoutParts.map(part => {
+      const rect = part.getBoundingClientRect();
+      const parent = part.closest('[data-preview]')!.getBoundingClientRect();
+      return [part, { x: rect.x - parent.x, y: rect.y - parent.y, width: rect.width, height: rect.height }];
+    }));
     const focus = document.activeElement instanceof HTMLElement && this.contains(document.activeElement) ? document.activeElement : null;
     const orderList = this.querySelector('.builder-order')!;
     const previewList = this.querySelector('.builder-canvas-blocks')!;
@@ -91,6 +109,7 @@ class SiteBuilder extends HTMLElement {
       const id = (item.dataset.row || item.dataset.preview) as BuilderBlockId;
       item.hidden = !this.order.includes(id);
       item.classList.toggle('is-selected', id === this.selected);
+      item.querySelector<HTMLElement>('.bp')?.setAttribute('data-variant', this.layouts[id]);
     });
     this.order.forEach((id, index) => {
       const row = this.querySelector<HTMLElement>(`[data-row="${id}"]`)!;
@@ -107,9 +126,12 @@ class SiteBuilder extends HTMLElement {
       button.setAttribute('aria-pressed', String(active));
       button.setAttribute('aria-label', `${active ? 'Выбрать' : 'Добавить'}: ${block.title}`);
       button.classList.toggle('is-selected', block.id === this.selected);
+      button.querySelector<HTMLElement>('.bp')!.dataset.variant = this.layouts[block.id];
     });
     this.querySelectorAll<HTMLButtonElement>('[data-select]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.select === this.selected)));
     this.querySelectorAll<HTMLButtonElement>('[data-device-button]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.deviceButton === this.device)));
+    this.querySelectorAll<HTMLElement>('[data-layout-group]').forEach(group => group.hidden = group.dataset.layoutGroup !== this.selected);
+    this.querySelectorAll<HTMLButtonElement>('[data-layout]').forEach(button => button.setAttribute('aria-pressed', String(this.layouts[button.dataset.block as BuilderBlockId] === button.dataset.layout)));
     this.querySelector<HTMLElement>('.builder-canvas')!.dataset.device = this.device;
     this.querySelectorAll<HTMLElement>('[data-empty]').forEach(item => item.hidden = this.order.length !== 0);
     const block = this.block(this.selected ?? undefined);
@@ -120,6 +142,7 @@ class SiteBuilder extends HTMLElement {
       const fields = { title: block.title, purpose: block.purpose, content: block.content, prepare: block.prepare, action: block.action };
       const changed = this.querySelector('[data-info-title]')!.textContent !== block.title;
       Object.entries(fields).forEach(([key, value]) => this.querySelector(`[data-info-${key}]`)!.textContent = value);
+      this.querySelector('[data-layout-description]')!.textContent = getBuilderLayout(block.id, this.layouts[block.id]).description;
       if (changed && animate && !this.reduced.matches) info.animate([{ opacity: .4, transform: 'translateY(5px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 220, easing: 'ease-out' });
     }
     const count = this.order.length;
@@ -129,10 +152,10 @@ class SiteBuilder extends HTMLElement {
       : !this.order.includes('hero') ? 'Первый экран поможет сразу объяснить ваше предложение.'
       : 'Основа готова. Содержание и детали обсудим вместе.';
     const discuss = this.querySelector<HTMLAnchorElement>('[data-discuss]')!;
-    discuss.href = `${this.dataset.contactUrl}&blocks=${encodeURIComponent(this.order.join(','))}`;
+    discuss.href = `${this.dataset.contactUrl}&blocks=${encodeURIComponent(this.order.join(','))}&layouts=${encodeURIComponent(this.order.map(id => `${id}:${this.layouts[id]}`).join(','))}`;
     discuss.setAttribute('aria-disabled', String(!count));
     discuss.tabIndex = count ? 0 : -1;
-    try { localStorage.setItem(builderStorageKey, JSON.stringify({ order: this.order, selected: this.selected, device: this.device })); } catch { /* Editing still works without persistence. */ }
+    try { localStorage.setItem(builderStorageKey, JSON.stringify({ order: this.order, selected: this.selected, device: this.device, layouts: this.layouts })); } catch { /* Editing still works without persistence. */ }
     if (focus && focus.isConnected && !focus.closest('[hidden]')) {
       if (focus instanceof HTMLButtonElement && focus.disabled) focus.closest('[data-row]')?.querySelector<HTMLButtonElement>('[data-select]')?.focus({ preventScroll: true });
       else focus.focus({ preventScroll: true });
@@ -150,6 +173,14 @@ class SiteBuilder extends HTMLElement {
       if (previous && (Math.abs(previous.top - next.top) > 1 || Math.abs(previous.left - next.left) > 1)) {
         item.animate([{ transform: `translate(${previous.left - next.left}px, ${previous.top - next.top}px)` }, { transform: 'translate(0, 0)' }], { duration: 300, easing: 'cubic-bezier(.2,.8,.2,1)' });
       } else if (!previous) item.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 240, easing: 'ease-out' });
+    });
+    if (animate && !this.reduced.matches) layoutParts.forEach(part => {
+      const previous = layoutBefore.get(part)!;
+      const next = part.getBoundingClientRect();
+      if (!next.width || !next.height) return;
+      const parent = part.closest('[data-preview]')!.getBoundingClientRect();
+      const transform = previous.width && previous.height ? `translate(${previous.x - (next.x - parent.x)}px, ${previous.y - (next.y - parent.y)}px) scale(${previous.width / next.width}, ${previous.height / next.height})` : 'translateY(8px)';
+      part.animate([{ opacity: previous.width ? .75 : 0, transform, transformOrigin: 'top left' }, { opacity: 1, transform: 'none', transformOrigin: 'top left' }], { duration: 340, easing: 'cubic-bezier(.2,.8,.2,1)' });
     });
   }
 
