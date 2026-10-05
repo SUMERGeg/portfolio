@@ -11,6 +11,16 @@ export type BuilderBlockId = typeof builderBlocks[number]['id'];
 export const builderDefaults: BuilderBlockId[] = ['hero', 'services', 'about', 'contact'];
 export const builderStorageKey = 'portfolio-site-outline-v1';
 
+export const builderCharacters = [
+  { id: 'strict', title: 'Строгий', summary: 'Чётко и по делу', description: 'Плотная сетка, ровная типографика и чёткие границы. Всё внимание — предложению.' },
+  { id: 'airy', title: 'Воздушный', summary: 'Больше пространства', description: 'Свободные отступы, мягкие формы и спокойные акценты. Сайт даёт содержанию больше воздуха.' },
+  { id: 'expressive', title: 'Выразительный', summary: 'Смелые акценты', description: 'Крупные заголовки, контраст и заметные акценты. Главное предложение выходит на первый план.' },
+] as const;
+export type BuilderCharacterId = typeof builderCharacters[number]['id'];
+export function getBuilderCharacter(value: unknown) {
+  return builderCharacters.find(character => character.id === value) ?? builderCharacters[0];
+}
+
 export const builderLayouts: Record<BuilderBlockId, readonly { id: string; title: string; description: string }[]> = {
   hero: [
     { id: 'split', title: 'Текст + фото', description: 'Предложение и изображение рядом: знакомим с бизнесом с первого экрана.' },

@@ -1,10 +1,11 @@
-import { builderBlocks, builderDefaults, builderStorageKey, validBuilderBlocks, validBuilderLayouts, getBuilderLayout, type BuilderBlockId } from '../data/builder';
+import { builderBlocks, builderDefaults, builderStorageKey, validBuilderBlocks, validBuilderLayouts, getBuilderLayout, getBuilderCharacter, type BuilderBlockId, type BuilderCharacterId } from '../data/builder';
 
 class SiteBuilder extends HTMLElement {
   private order: BuilderBlockId[] = [...builderDefaults];
   private selected: BuilderBlockId | null = 'hero';
   private device = 'desktop';
   private layouts = validBuilderLayouts(null);
+  private character: BuilderCharacterId = 'strict';
   private controller?: AbortController;
   private dragged: BuilderBlockId | null = null;
   private pointer?: { id: number; startX: number; startY: number; source: HTMLElement; block: BuilderBlockId };
@@ -22,6 +23,7 @@ class SiteBuilder extends HTMLElement {
         this.selected = this.order.includes(saved.selected) ? saved.selected : this.order[0] ?? null;
         this.device = saved.device === 'mobile' ? 'mobile' : 'desktop';
         this.layouts = validBuilderLayouts(saved.layouts);
+        this.character = getBuilderCharacter(saved.character).id;
       }
     } catch { /* A blocked or unavailable storage never prevents editing. */ }
     this.querySelectorAll<HTMLButtonElement>('button').forEach(button => button.disabled = false);
@@ -52,6 +54,11 @@ class SiteBuilder extends HTMLElement {
     if (added) {
       if (!this.order.includes(added.id)) { this.order.push(added.id); this.announce(`Добавлен раздел «${added.title}».`); }
       this.selected = added.id;
+    } else if (control.dataset.characterButton) {
+      const character = getBuilderCharacter(control.dataset.characterButton);
+      if (character.id === this.character) return;
+      this.character = character.id;
+      this.announce(`Характер сайта: «${character.title}». Структура и компоновки сохранены.`);
     } else if (control.dataset.layout) {
       const block = this.block(control.dataset.block);
       if (!block || block.id !== this.selected || !this.order.includes(block.id)) return;
@@ -85,6 +92,7 @@ class SiteBuilder extends HTMLElement {
       this.selected = 'hero';
       this.device = 'desktop';
       this.layouts = validBuilderLayouts(null);
+      this.character = 'strict';
       this.announce('Восстановлена начальная структура из четырёх разделов.');
     } else return;
     this.render();
@@ -94,7 +102,8 @@ class SiteBuilder extends HTMLElement {
     const items = [...this.querySelectorAll<HTMLElement>('[data-row], [data-preview]')];
     items.forEach(item => item.getAnimations().forEach(animation => animation.cancel()));
     const before = new Map(items.filter(item => !item.hidden).map(item => [item, item.getBoundingClientRect()]));
-    const changedLayouts = items.filter(item => item.dataset.preview && !item.hidden && item.querySelector<HTMLElement>('.bp')!.dataset.variant !== this.layouts[item.dataset.preview as BuilderBlockId]);
+    const characterChanged = this.dataset.character !== this.character;
+    const changedLayouts = items.filter(item => item.dataset.preview && !item.hidden && (characterChanged || item.querySelector<HTMLElement>('.bp')!.dataset.variant !== this.layouts[item.dataset.preview as BuilderBlockId]));
     const layoutParts = changedLayouts.flatMap(item => [...item.querySelectorAll<HTMLElement>('.bp-copy, .bp-hero-image, .bp-service-card, .bp-product, .bp-about-image, .bp-review-card, .bp-map, .bp-form')]);
     layoutParts.forEach(part => part.getAnimations().forEach(animation => animation.cancel()));
     const layoutBefore = new Map(layoutParts.map(part => {
@@ -103,6 +112,9 @@ class SiteBuilder extends HTMLElement {
       return [part, { x: rect.x - parent.x, y: rect.y - parent.y, width: rect.width, height: rect.height }];
     }));
     const focus = document.activeElement instanceof HTMLElement && this.contains(document.activeElement) ? document.activeElement : null;
+    this.dataset.character = this.character;
+    this.querySelectorAll<HTMLButtonElement>('[data-character-button]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.characterButton === this.character)));
+    this.querySelector('[data-character-description]')!.textContent = getBuilderCharacter(this.character).description;
     const orderList = this.querySelector('.builder-order')!;
     const previewList = this.querySelector('.builder-canvas-blocks')!;
     items.forEach(item => {
@@ -152,10 +164,10 @@ class SiteBuilder extends HTMLElement {
       : !this.order.includes('hero') ? 'Первый экран поможет сразу объяснить ваше предложение.'
       : 'Основа готова. Содержание и детали обсудим вместе.';
     const discuss = this.querySelector<HTMLAnchorElement>('[data-discuss]')!;
-    discuss.href = `${this.dataset.contactUrl}&blocks=${encodeURIComponent(this.order.join(','))}&layouts=${encodeURIComponent(this.order.map(id => `${id}:${this.layouts[id]}`).join(','))}`;
+    discuss.href = `${this.dataset.contactUrl}&blocks=${encodeURIComponent(this.order.join(','))}&layouts=${encodeURIComponent(this.order.map(id => `${id}:${this.layouts[id]}`).join(','))}&character=${this.character}`;
     discuss.setAttribute('aria-disabled', String(!count));
     discuss.tabIndex = count ? 0 : -1;
-    try { localStorage.setItem(builderStorageKey, JSON.stringify({ order: this.order, selected: this.selected, device: this.device, layouts: this.layouts })); } catch { /* Editing still works without persistence. */ }
+    try { localStorage.setItem(builderStorageKey, JSON.stringify({ order: this.order, selected: this.selected, device: this.device, layouts: this.layouts, character: this.character })); } catch { /* Editing still works without persistence. */ }
     if (focus && focus.isConnected && !focus.closest('[hidden]')) {
       if (focus instanceof HTMLButtonElement && focus.disabled) focus.closest('[data-row]')?.querySelector<HTMLButtonElement>('[data-select]')?.focus({ preventScroll: true });
       else focus.focus({ preventScroll: true });

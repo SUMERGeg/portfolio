@@ -1,5 +1,5 @@
 ---
-import { builderBlocks, builderDefaults, builderLayouts } from '../../data/builder';
+import { builderBlocks, builderDefaults, builderLayouts, builderCharacters } from '../../data/builder';
 import { withBase } from '../../data/urls';
 import ArrowIcon from '../ArrowIcon.astro';
 import BlockPreview from './BlockPreview.astro';
@@ -13,7 +13,19 @@ const initial = builderBlocks[0];
     <p class="lead">Выберите разделы — макет соберётся рядом.</p>
     <p>Это набросок для обсуждения. Дизайн, содержание и детали спроектируем вместе.</p>
   </header>
-  <site-builder data-contact-url={withBase('/contact/?service=creation')}>
+  <site-builder data-character="strict" data-contact-url={withBase('/contact/?service=creation')}>
+    <fieldset class="builder-character-picker">
+      <legend>Характер сайта</legend>
+      <div class="builder-character-options">
+        {builderCharacters.map((character, index) => <button type="button" class="builder-character-option" data-character-button={character.id} data-character-sample={character.id} aria-pressed={index === 0} disabled>
+          <div class="builder-character-sample" aria-hidden="true"><BlockPreview type="hero" variant="split" mini /></div>
+          <span class="builder-character-copy"><strong>{character.title}</strong><span>{character.summary}</span></span>
+          <span class="builder-character-check" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="m4 8 2.5 2.5L12 5" /></svg></span>
+        </button>)}
+      </div>
+      <p class="builder-character-description" data-character-description>{builderCharacters[0].description}</p>
+      <p class="builder-character-hint">Оформление меняется, выбранные разделы и компоновки остаются.</p>
+    </fieldset>
     <div class="builder-library" aria-label="Добавить раздел">
       {builderBlocks.map(block => <button type="button" class="builder-tile" data-add={block.id} aria-pressed={builderDefaults.includes(block.id)} aria-label={`${builderDefaults.includes(block.id) ? 'Выбрать' : 'Добавить'}: ${block.title}`} disabled>
         <BlockPreview type={block.id} mini />
@@ -56,7 +68,7 @@ const initial = builderBlocks[0];
             <p class="builder-canvas-empty" data-empty hidden>Здесь появится ваш макет</p>
           </div>
         </div>
-        <p class="builder-preview-caption">Макет можно прокрутить. Текст и изображения заменены на схемы.</p>
+        <p class="builder-preview-caption">Макет можно прокрутить. Содержание условное — это схема будущего сайта.</p>
       </section>
       <aside class="builder-inspector" aria-labelledby="builder-info-title">
         <div class="builder-info" data-info>

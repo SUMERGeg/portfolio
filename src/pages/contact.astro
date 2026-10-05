@@ -19,7 +19,7 @@ import '../styles/interior.css';
 
 <script>
   import { services } from '../data/site';
-  import { builderBlocks, validBuilderBlocks, parseBuilderLayouts, getBuilderLayout } from '../data/builder';
+  import { builderBlocks, validBuilderBlocks, parseBuilderLayouts, getBuilderLayout, getBuilderCharacter } from '../data/builder';
   class ContactContext extends HTMLElement {
     private controller?: AbortController;
     connectedCallback() {
@@ -30,7 +30,8 @@ import '../styles/interior.css';
       if (!selected) return;
       const outline = validBuilderBlocks((params.get('blocks') || '').split(',').slice(0, 6));
       const layouts = parseBuilderLayouts(params.get('layouts') || '');
-      const message = outline.length ? `${selected.message}\n\nНабросок структуры:\n${outline.map((id, index) => `${index + 1}. ${builderBlocks.find(block => block.id === id)!.title}${params.has('layouts') ? ` — ${getBuilderLayout(id, layouts[id]).title}` : ''}`).join('\n')}\n\nЭто предварительный набросок — хочу обсудить подходящую структуру.` : selected.message;
+      const character = params.has('character') ? `\n\nХарактер сайта: ${getBuilderCharacter(params.get('character')).title}.` : '';
+      const message = outline.length ? `${selected.message}\n\nНабросок структуры:\n${outline.map((id, index) => `${index + 1}. ${builderBlocks.find(block => block.id === id)!.title}${params.has('layouts') ? ` — ${getBuilderLayout(id, layouts[id]).title}` : ''}`).join('\n')}${character}\n\nЭто предварительный набросок — хочу обсудить подходящую структуру.` : selected.message;
       this.querySelector('[data-contact-title]')!.textContent = outline.length ? 'сайт по вашему наброску.' : selected.contactTitle;
       this.querySelector('[data-contact-hint]')!.textContent = outline.length ? 'Выбранные разделы уже добавлены в сообщение. Дополните его парой слов о бизнесе — структуру и детали обсудим вместе.' : `${selected.contactHint} Готовое ТЗ не нужно — детали обсудим вместе.`;
       this.querySelector('[data-contact-message]')!.textContent = message;
