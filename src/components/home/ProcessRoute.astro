@@ -1,82 +1,100 @@
 ---
 import { process } from '../../data/site';
-import ArrowIcon from '../ArrowIcon.astro';
+import ProcessScene from './ProcessScene.astro';
 import '../../styles/process-route.css';
+const first = process[0];
 ---
 
 <process-route class="process-route">
-  <p class="process-hint">Выберите этап — посмотрите, что делаю я, где участвуете вы и что получаем в итоге.</p>
-  <ol class="process-route-list">
+  <p class="process-hint">Выберите этап — посмотрите, как задача превращается в сайт, что делаю я и где участвуете вы.</p>
+  <ol class="process-stage-list" aria-label="Этапы работы над сайтом" hidden>
     {process.map((step, index) => (
-      <li>
-        <details open={index === 0}>
-          <summary>
-            <span class="process-node" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-            <span class="process-step-copy"><span class="process-step-title">{step.title}</span><span class="process-step-description">{step.description}</span></span>
-            <span class="process-toggle" aria-hidden="true">+</span>
-          </summary>
-          <div class="process-body">
-            <section class="process-task"><h3>Что делаю я</h3><p>{step.mine}</p></section>
-            <section class="process-result"><span class="eyebrow">Результат этапа {String(index + 1).padStart(2, '0')}</span><h3>{step.result}</h3><p>{step.output}</p><span class="process-result-arrow"><ArrowIcon /></span></section>
-            <section class="process-task"><h3>Что нужно от вас</h3><p>{step.yours}</p></section>
-          </div>
-        </details>
-      </li>
+      <li><button type="button" data-process-stage={index} aria-pressed={index === 0 ? 'true' : 'false'} aria-controls="process-stage-details">
+        <span class="process-stage-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+        <span class="process-stage-copy"><span class="process-stage-title">{step.title}</span><span class="process-stage-description">{step.description}</span></span>
+      </button></li>
     ))}
   </ol>
-  <div id="process-stage-details" class="process-body process-desktop-panel" role="region" aria-label="Подробности выбранного этапа"></div>
+  <div id="process-stage-details" class="process-workspace" role="region" aria-labelledby="process-stage-result" hidden>
+    <section class="process-role process-role-mine"><p class="process-role-label">Моя работа</p><h3>Что делаю я</h3><p data-process-mine>{first.mine}</p></section>
+    <div class="process-workspace-center">
+      <ProcessScene />
+      <section class="process-outcome"><p class="process-outcome-label" data-process-number>Результат этапа 01</p><h3 id="process-stage-result" data-process-result>{first.result}</h3><p data-process-output>{first.output}</p></section>
+    </div>
+    <section class="process-role process-role-yours"><p class="process-role-label">Ваше участие</p><h3>Что нужно от вас</h3><p data-process-yours>{first.yours}</p></section>
+  </div>
+  <p class="sr-only" role="status" aria-live="polite" aria-atomic="true" data-process-status></p>
+  <ol class="process-fallback">
+    {process.map((step, index) => (
+      <li><details open={index === 0}><summary><span>{String(index + 1).padStart(2, '0')}</span> {step.title}</summary>
+        <div class="process-fallback-body"><section><h3>Что делаю я</h3><p>{step.mine}</p></section><section><h3>{step.result}</h3><p>{step.output}</p></section><section><h3>Что нужно от вас</h3><p>{step.yours}</p></section></div>
+      </details></li>
+    ))}
+  </ol>
 </process-route>
 
 <script>
+  import { process as stages } from '../../data/site';
   class ProcessRoute extends HTMLElement {
     private controller?: AbortController;
     connectedCallback() {
       this.controller?.abort();
       this.controller = new AbortController();
       const { signal } = this.controller;
-      const steps = Array.from(this.querySelectorAll('details'));
-      const panel = this.querySelector<HTMLElement>('.process-desktop-panel');
-      const desktop = matchMedia('(min-width: 56.25rem)');
+      const buttons = Array.from(this.querySelectorAll<HTMLButtonElement>('[data-process-stage]'));
+      const navigation = this.querySelector<HTMLOListElement>('.process-stage-list');
+      const workspace = this.querySelector<HTMLElement>('.process-workspace');
+      const scene = this.querySelector<HTMLElement>('.process-scene');
+      const fallback = this.querySelector<HTMLElement>('.process-fallback');
+      const mine = this.querySelector<HTMLElement>('[data-process-mine]');
+      const yours = this.querySelector<HTMLElement>('[data-process-yours]');
+      const result = this.querySelector<HTMLElement>('[data-process-result]');
+      const output = this.querySelector<HTMLElement>('[data-process-output]');
+      const number = this.querySelector<HTMLElement>('[data-process-number]');
+      const status = this.querySelector<HTMLElement>('[data-process-status]');
+      if (!navigation || !workspace || !scene || !fallback || !mine || !yours || !result || !output || !number || buttons.length !== stages.length) return;
       let selected = 0;
-      this.setAttribute('data-enhanced', '');
+      this.dataset.stage = '0';
       const select = (index: number) => {
+        if (index === selected) return;
+        const step = stages[index];
+        if (!step) return;
+        scene.getAnimations({ subtree: true }).forEach(animation => animation.cancel());
         selected = index;
-        this.style.setProperty('--route-progress', String(index / (steps.length - 1)));
-        steps.forEach((step, position) => step.toggleAttribute('data-reached', position <= index));
-        const body = steps[index].querySelector('.process-body');
-        if (panel && body) {
-          panel.replaceChildren(...Array.from(body.children).map(child => child.cloneNode(true)));
-          panel.setAttribute('aria-label', `Этап ${index + 1}: ${processTitle(steps[index])}`);
-          if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-            panel.getAnimations().forEach(animation => animation.cancel());
-            panel.animate([{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 380, easing: 'cubic-bezier(.16,1,.3,1)' });
-          }
+        this.dataset.stage = String(index);
+        buttons.forEach((button, position) => button.setAttribute('aria-pressed', String(position === index)));
+        mine.textContent = step.mine;
+        yours.textContent = step.yours;
+        result.textContent = step.result;
+        output.textContent = step.output;
+        number.textContent = `Результат этапа ${String(index + 1).padStart(2, '0')}`;
+        if (status) status.textContent = `Этап ${index + 1}: ${step.title}. ${step.result}.`;
+        const texts = [mine, yours, result, output];
+        texts.forEach(text => text.getAnimations().forEach(animation => animation.cancel()));
+        if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+          texts.forEach(text => text.animate([{ opacity: 0, transform: 'translateY(5px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 280, easing: 'cubic-bezier(.2,.7,.3,1)' }));
         }
       };
-      select(0);
-      const syncLayout = () => {
-        steps.forEach(step => {
-          const summary = step.querySelector('summary');
-          if (desktop.matches) summary?.setAttribute('aria-controls', 'process-stage-details');
-          else summary?.removeAttribute('aria-controls');
-        });
-        if (desktop.matches) steps[selected].open = true;
-      };
-      syncLayout();
-      desktop.addEventListener('change', syncLayout, { signal });
-      steps.forEach((step, index) => {
-        step.querySelector('summary')?.addEventListener('click', event => {
-          if (desktop.matches && step.open) event.preventDefault();
-        }, { signal });
-        step.addEventListener('toggle', () => {
-          if (!step.open) return;
-          steps.forEach(other => { if (other !== step) other.open = false; });
-          select(index);
+      buttons.forEach((button, index) => {
+        button.addEventListener('click', () => select(index), { signal });
+        button.addEventListener('keydown', event => {
+          let target = index;
+          if (event.key === 'ArrowRight') target = (index + 1) % buttons.length;
+          else if (event.key === 'ArrowLeft') target = (index - 1 + buttons.length) % buttons.length;
+          else if (event.key === 'Home') target = 0;
+          else if (event.key === 'End') target = buttons.length - 1;
+          else return;
+          event.preventDefault();
+          buttons[target].focus({ preventScroll: true });
+          select(target);
         }, { signal });
       });
+      fallback.hidden = true;
+      navigation.hidden = false;
+      workspace.hidden = false;
+      this.dataset.enhanced = '';
     }
     disconnectedCallback() { this.controller?.abort(); }
   }
-  function processTitle(step: HTMLDetailsElement) { return step.querySelector('.process-step-title')?.textContent ?? ''; }
   if (!customElements.get('process-route')) customElements.define('process-route', ProcessRoute);
 </script>

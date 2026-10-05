@@ -1,0 +1,69 @@
+---
+import { Image } from 'astro:assets';
+import noirHome from '../../assets/projects/noir/home-desktop.jpg';
+import '../../styles/process-scene.css';
+---
+
+<div class="process-scene" aria-hidden="true">
+  <div class="process-scene-status">
+    <span class="process-scene-project">NOIR / от идеи к сайту</span>
+    <span class="process-scene-published">
+      <svg viewBox="0 0 20 20" fill="none"><path d="m5 10 3.5 3.5L15 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      Сайт опубликован
+    </span>
+  </div>
+
+  <div class="process-scene-workspace">
+    <div class="process-scene-notes">
+      <div class="process-scene-note process-scene-note-goal">
+        <span class="process-scene-note-index">01 / задача</span>
+        <span class="process-scene-note-label">Цель сайта</span>
+        <strong>Помочь выбрать услугу<br />и запросить расчёт</strong>
+        <span class="process-scene-note-rule"></span>
+        <span class="process-scene-note-meta">Для владельцев автомобилей</span>
+      </div>
+      <div class="process-scene-note process-scene-note-pages">
+        <span class="process-scene-note-label">Структура</span>
+        <strong>Главная · услуги<br />проекты · стоимость</strong>
+      </div>
+      <div class="process-scene-note process-scene-note-action">
+        <span class="process-scene-note-label">Главное действие</span>
+        <strong>Обсудить<br />автомобиль</strong>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </div>
+    </div>
+
+    <div class="process-scene-browser">
+      <div class="process-scene-toolbar">
+        <span class="process-scene-window-dots"><i></i><i></i><i></i></span>
+        <span class="process-scene-address">
+          <svg viewBox="0 0 16 16" fill="none"><rect x="4" y="7" width="8" height="6" rx="1.5" stroke="currentColor" /><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-linecap="round" /></svg>
+          <span class="process-scene-address-text">
+            <span class="process-scene-address-preview">NOIR · сайт</span>
+            <span class="process-scene-address-public">sumergeg.github.io/noir</span>
+          </span>
+        </span>
+        <span class="process-scene-toolbar-mark"></span>
+      </div>
+      <div class="process-scene-screen">
+        <div class="process-scene-wireframe">
+          <div class="process-scene-wire-nav"><strong>NOIR.</strong><span></span><span></span><span></span><i></i></div>
+          <div class="process-scene-wire-hero">
+            <div class="process-scene-wire-copy">
+              <span class="process-scene-wire-eyebrow"></span>
+              <span class="process-scene-wire-title"></span>
+              <span class="process-scene-wire-title process-scene-wire-title-long"></span>
+              <div class="process-scene-wire-description"><i></i><i></i><i></i></div>
+              <div class="process-scene-wire-actions"><span></span><i></i></div>
+            </div>
+            <div class="process-scene-wire-image"><svg viewBox="0 0 36 36" fill="none"><rect x="4" y="6" width="28" height="24" rx="2" stroke="currentColor" /><circle cx="12" cy="13" r="2" stroke="currentColor" /><path d="m5 25 9-8 6 5 5-9 7 12" stroke="currentColor" stroke-linejoin="round" /></svg></div>
+          </div>
+          <div class="process-scene-wire-footer"><span></span><span></span><span></span><span></span></div>
+        </div>
+        <Image class="process-scene-site" src={noirHome} alt="" widths={[480, 800, 1200]} sizes="(max-width: 899px) 90vw, 580px" loading="lazy" decoding="async" format="webp" />
+        <span class="process-scene-launch-line"></span>
+      </div>
+    </div>
+  </div>
+  <span class="process-scene-caption">Этапы на примере проекта NOIR</span>
+</div>
