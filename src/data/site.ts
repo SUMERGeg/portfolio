@@ -28,7 +28,7 @@ export const services = [
   {
     id: 'creation',
     title: 'Сайт с нуля',
-    startingPrice: 35000,
+    startingPrice: 12000,
     baseScope: 'Одностраничный сайт на 5–7 разделов с индивидуальным дизайном, адаптивной разработкой и публикацией.',
     discussion: 'Обсудить сайт с нуля',
     contactTitle: 'сайт с нуля.',
@@ -39,7 +39,7 @@ export const services = [
   {
     id: 'redesign',
     title: 'Редизайн',
-    startingPrice: 20000,
+    startingPrice: 6000,
     baseScope: 'Обновление одной страницы с согласованными изменениями структуры, дизайна и их реализацией.',
     discussion: 'Обсудить редизайн',
     contactTitle: 'редизайн сайта.',
@@ -50,7 +50,7 @@ export const services = [
   {
     id: 'improvements',
     title: 'Доработка',
-    startingPrice: 10000,
+    startingPrice: 3000,
     baseScope: 'Небольшая согласованная задача: новый блок или улучшение конкретного сценария на существующем сайте.',
     discussion: 'Обсудить доработку',
     contactTitle: 'доработку сайта.',
